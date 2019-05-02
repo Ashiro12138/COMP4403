@@ -1,0 +1,15 @@
+Compiling test-ptr5-ptrptr.pl0
+Parsing complete
+Static semantic analysis complete
+Code generation complete
+Running ...
+100
+
+Runtime error: nil pointer dereference
+PC=1137 in PROC   <main> : PROCEDURE() level 0 : 1141 FP=0 SL=0 DL=0 RA=0
+  x(3) = 999
+  y(4) = 998
+End of traceBack
+
+Terminated
+No errors detected.

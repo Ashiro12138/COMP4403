@@ -1,0 +1,14 @@
+Compiling test-ptr3-nil.pl0
+Parsing complete
+Static semantic analysis complete
+Code generation complete
+Running ...
+
+Runtime error: nil pointer dereference
+PC=1026 in PROC   q : PROCEDURE() level 1 : 1030 FP=4 SL=0 DL=0 RA=1038
+PC=1038 in PROC   <main> : PROCEDURE() level 0 : 1039 FP=0 SL=0 DL=0 RA=0
+  p(3) = -2139062144
+End of traceBack
+
+Terminated
+No errors detected.

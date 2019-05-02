@@ -1,0 +1,8 @@
+Compiling test-rec03-sem.pl0
+Parsing complete
+    10   r.y := 100; // y not a field of r
+******   ^  Error: record doesn't contain attribute y
+    12   write r.y   // y not a field of r
+******         ^  Error: record doesn't contain attribute y
+Static semantic analysis complete
+2 errors detected.
