@@ -151,7 +151,10 @@ non terminal ConstExp         Constant;
 non terminal                  TypeDefSeq, 
                               TypeDef;
 non terminal Type             Type,
-                              TypeIdentifier;
+                              TypeIdentifier,
+                              SubrangeType,
+                              RecordType,
+                              PointerType;
 non terminal                  VarDeclSeq, 
                               VarDecl;
 non terminal DeclNode.ProcedureNode  ProcedureDef;
@@ -173,6 +176,9 @@ non terminal Operator         Relation,
                               MulOp,
                               UnaryOperator;
 non terminal ExpNode          LValue;
+non terminal Type.Field       Fields;
+non terminal Type.Field       Field;
+non terminal ExpNode          ExpList;
 
 /**-------------------------------------------------------------*
  *------------------------ GRAMMAR RULES -----------------------*
@@ -325,15 +331,50 @@ TypeDef ::= IDENTIFIER:id EQUALS Type:type SEMICOLON
     |  error 
     ;
 
-Type ::= TypeIdentifier:type
-        {: 
-            RESULT = type;
+Fields ::= Field:fld
+        {:
+            // TODO
         :}
-    | LBRACKET:subr Constant:lo RANGE Constant:hi RBRACKET
+    |   Fields:flds SEMICOLON Field:fld
+        {:
+            // TODO
+        :}
+     ;
+
+RecordType ::= KW_RECORD Fields:fields KW_END
+        {:
+            // TODO RESULT = new Type.RecordType();
+        :}
+     ;
+PointerType ::= POINTER TypeIdentifier:identifier
+        {:
+            // TODO RESULT = new Type.PointerType(identifier.getType());
+        :}
+     ;
+
+SubrangeType ::= LBRACKET:subr Constant:lo RANGE Constant:hi RBRACKET
         {:
             RESULT = new Type.SubrangeType(subrxleft, lo, hi);
         :}
-    | error:err
+     ;
+Type ::= TypeIdentifier:type
+        {: 
+            RESULT = type;
+
+        :}
+    |   SubrangeType:type
+        {:
+            RESULT = type;
+        :}
+    |   RecordType:type
+        {:
+            RESULT = type;
+        :}
+    |   PointerType:type
+        {:
+            RESULT = type;
+        :}
+    |   error:err
         {:
             RESULT = Type.ERROR_TYPE;
         :}
@@ -346,7 +387,6 @@ TypeIdentifier ::= IDENTIFIER:id
             RESULT = new Type.IdRefType(idxleft, id, currentScope);
         :}
     ;
-
 VarDeclSeq ::= VarDecl
     |  VarDeclSeq VarDecl
     ;
@@ -470,6 +510,20 @@ LValue ::= IDENTIFIER:id
              */
             RESULT = new ExpNode.IdentifierNode(idxleft, id);
         :}
+    | LValue:lval PERIOD IDENTIFIER:id
+        {:
+            // A field reference
+            // r.x
+            // TODO new ExpNode.FieldNode()
+            // RESULT = new ExpNode.RecordReferenceNode(idxleft, lval);
+        :}
+    | LValue:lval POINTER
+        {:
+            // A pointer dereference
+            // p^
+            //TODO return ExpNode.PointerDereferenceNode()
+            // RESULT = new ExpNode.PointerNode(lavalxleft, lval)
+        :}
     | error:e
         {:
             RESULT = new ExpNode.ErrorNode(exleft);
@@ -582,10 +636,30 @@ Factor ::= PLUS Factor:e
         {:
             RESULT = lval;
         :}
+    |   KW_NEW TypeIdentifier:type
+        {:
+            // Pointer value assigned dynamically allocated objects of its base type
+            // via a new expression e.g. "new List in p := new List
+            //TODO return ExpNode.NewPointerNode
+        :}
+    |   TypeIdentifier:type LCURLY ExpList:list RCURLY
+        {:
+            // record constructor r := "Node{2, p}"
+            // TODO return ExpNode.RecordConstructorNode()
+
+        :}
+    ;
+ExpList ::= Condition:condition
+        {:
+            //TODO return ExpNode.ExpListNode()
+        :}
+    | ExpList:list COMMA Condition:condition
+        {:
+
+        :}
     ;
 UnaryOperator ::= MINUS
         {:
             RESULT = Operator.NEG_OP;
         :}
     ;
-

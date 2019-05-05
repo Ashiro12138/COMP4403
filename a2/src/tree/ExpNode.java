@@ -1,6 +1,6 @@
 package tree;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import java_cup.runtime.ComplexSymbolFactory.Location;
@@ -448,6 +448,208 @@ public abstract class ExpNode {
         @Override
         public String toString() {
             return "WidenSubrange(" + exp + ":" + getType() + ")";
+        }
+    }
+
+    /**
+     * Tree node representing a record field
+     * e.g. x:int
+     */
+    public static class FieldNode extends ExpNode {
+        ExpNode field;
+
+        FieldNode(Location loc, Type type) {
+            super(loc, type);
+        }
+
+        FieldNode(Location loc) {
+            super(loc);
+        }
+
+        public ExpNode getFieldNode() {
+            return field;
+        }
+
+        @Override
+        public Type getType() {
+            return super.getType();
+        }
+
+        @Override
+        public void setType(Type type) {
+            super.setType(type);
+        }
+
+        @Override
+        public Location getLocation() {
+            return super.getLocation();
+        }
+
+        @Override
+        public ExpNode transform(ExpTransform<ExpNode> visitor) {
+            return null;
+        }
+
+        @Override
+        public Code genCode(ExpTransform<Code> visitor) {
+            return null;
+        }
+    }
+
+    /**
+     * Tree node representing a list of fields
+     * e.g. x:int, next:List
+     */
+    public static class FieldListNode extends ExpNode {
+        ArrayList<ExpNode> fieldsList;
+
+        FieldListNode(Location loc, Type type) {
+            super(loc, type);
+        }
+
+        FieldListNode(Location loc, ArrayList<ExpNode> fieldsList) {
+            super(loc);
+            fieldsList = this.fieldsList;
+        }
+
+        public ArrayList<ExpNode> getFieldsList() {
+            //TODO do this
+            return fieldsList;
+        }
+
+        @Override
+        public Type getType() {
+            return super.getType();
+        }
+
+        @Override
+        public void setType(Type type) {
+            super.setType(type);
+        }
+
+        @Override
+        public Location getLocation() {
+            return super.getLocation();
+        }
+
+        @Override
+        public ExpNode transform(ExpTransform<ExpNode> visitor) {
+            return null;
+        }
+
+        @Override
+        public Code genCode(ExpTransform<Code> visitor) {
+            return null;
+        }
+    }
+
+    /**
+     * Tree node representing a definition of a record
+     * e.g. Node = record x:int, next:List end;
+     */
+    public static class RecordDefNode extends ExpNode {
+       // FieldListNode fields;
+
+        RecordDefNode(Location loc, Type type) {
+            super(loc, type);
+           // fields = new FieldsNode()
+        }
+
+        RecordDefNode(Location loc) {
+            super(loc);
+        }
+
+        public void getFieldsNode() {
+            // TODO Returns a fields node
+
+        }
+
+        @Override
+        public Type getType() {
+            return super.getType();
+        }
+
+        @Override
+        public void setType(Type type) {
+            super.setType(type);
+        }
+
+        @Override
+        public Location getLocation() {
+            return super.getLocation();
+        }
+
+        @Override
+        public ExpNode transform(ExpTransform<ExpNode> visitor) {
+            return null;
+        }
+
+        @Override
+        public Code genCode(ExpTransform<Code> visitor) {
+            return null;
+        }
+
+        /**
+         * Tree node representing a record made from the constructor
+         * e.g. r = Node{2, p}
+         */
+        public static class RecordConstructorNode extends ExpNode {
+            RecordConstructorNode(Location loc, Type type) {
+                super(loc, type);
+            }
+
+            RecordConstructorNode(Location loc) {
+                super(loc);
+            }
+
+            // Get object?
+            // Get field?
+
+            @Override
+            public Type getType() {
+                return super.getType();
+            }
+
+            @Override
+            public void setType(Type type) {
+                super.setType(type);
+            }
+
+            @Override
+            public Location getLocation() {
+                return super.getLocation();
+            }
+
+            @Override
+            public ExpNode transform(ExpTransform<ExpNode> visitor) {
+                return null;
+            }
+
+            @Override
+            public Code genCode(ExpTransform<Code> visitor) {
+                return null;
+            }
+        }
+
+        /**
+         * Tree node representing a pointer definition
+         */
+        public static class PointerDefNode extends ExpNode {
+
+        }
+
+        /**
+         * Tree node representing a deferenced pointer
+         */
+        public static class PointerDereferenceNode extends ExpNode {
+
+        }
+
+        /**
+         * Tree node representing an ExpList
+         */
+        public static class ExpListNode extends ExpNode {
+
         }
     }
 }

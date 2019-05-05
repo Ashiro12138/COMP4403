@@ -1,4 +1,4 @@
-/** JFlex lexical analyzer for PL0.
+ /** JFlex lexical analyzer for PL0.
  * The input to JFlex consists of three sections:
  * - user code to be included directly in the generated class,
  * - options and definitions for JFlex, and
