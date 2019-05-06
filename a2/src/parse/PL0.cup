@@ -176,9 +176,9 @@ non terminal Operator         Relation,
                               MulOp,
                               UnaryOperator;
 non terminal ExpNode          LValue;
-non terminal Type.Field       Fields;
+non terminal Type.RecordType  Fields;
 non terminal Type.Field       Field;
-non terminal ExpNode          ExpList;
+non terminal ExpNode.ExpListNode ExpList;
 
 /**-------------------------------------------------------------*
  *------------------------ GRAMMAR RULES -----------------------*
@@ -331,24 +331,59 @@ TypeDef ::= IDENTIFIER:id EQUALS Type:type SEMICOLON
     |  error 
     ;
 
-Fields ::= Field:fld
+Field ::= IDENTIFIER:id COLON TypeIdentifier:typeId
         {:
-            // TODO
+            /* Written to define a field and its type
+             * this is a type definition and so it returns a type
+             * Returns: Type.Field
+             * e.g. x:int */
+            RESULT = new Type.Field(idxleft, id, typeId);
         :}
-    |   Fields:flds SEMICOLON Field:fld
+    ;
+
+Fields ::= Field:field
         {:
-            // TODO
+            /* Written to define multiple fields and their types. This makes it a type definition
+             * and so it returns a type (and not an ExpNode)
+             * Type.RecordType can hold a list of fields (id, typeId) so we can use that
+             * Returns: Type.RecordType
+             * e.g. x:int, y:boolean */
+            RESULT = new Type.RecordType();
+
+            // add field of type Field with id and typeId already parsed
+            RESULT.add(field);
+        :}
+    |   Fields:fields SEMICOLON Field:field
+        {:
+            // Fields would already be declared as type RecordType
+            fields.add(field);
+            RESULT = fields;
         :}
      ;
 
 RecordType ::= KW_RECORD Fields:fields KW_END
         {:
-            // TODO RESULT = new Type.RecordType();
+            /* Written to define a type of record with given fields (List of (id, typeId)) and
+             * field types. This grammar isn't actually creating an instance of a record, it just
+             * defines what fields this kind of record will hold. Note that when Fields is
+             * parsed, it returns a RecordType with the fields already parsed, so we just want to
+             * return that
+             * Returns: Type.RecordType
+             * e.g. record x:int, next:List end */
+
+            RESULT = fields;
         :}
      ;
 PointerType ::= POINTER TypeIdentifier:identifier
         {:
-            // TODO RESULT = new Type.PointerType(identifier.getType());
+            /* This is written to define a pointer type. This is not an instance of a
+             * pointer, it just states that it is a pointer ot a particular type. TypeIdentifier
+             * is used because the type might not be known at parse time.
+             *
+             * Returns: Type.PointerType
+             * e.g. ^ Node where Node is of Type.RecordType */
+
+            RESULT = new Type.PointerType(identifier);
         :}
      ;
 
@@ -512,17 +547,26 @@ LValue ::= IDENTIFIER:id
         :}
     | LValue:lval PERIOD IDENTIFIER:id
         {:
-            // A field reference
-            // r.x
-            // TODO new ExpNode.FieldNode()
-            // RESULT = new ExpNode.RecordReferenceNode(idxleft, lval);
+            /* This is written to access a field inside a record. The record should have already
+             * been initialised by now with its RecordType. But we can't access that (going
+             * backwards in parsing) so we can make a separate RecordReferenceNode to record what
+             * we are trying to access, so we can look it up in the symbol table. Note that lvalue
+             * could be ConstNode or VariableNode.
+             * Returns: ExpNode.RecordFieldAccessNode
+             * e.g. if r is a record, r.x */
+
+            RESULT = new ExpNode.RecordFieldAccessNode(idxleft, lval, id);
         :}
     | LValue:lval POINTER
         {:
-            // A pointer dereference
-            // p^
-            //TODO return ExpNode.PointerDereferenceNode()
-            // RESULT = new ExpNode.PointerNode(lavalxleft, lval)
+            /* The purpose of this grammar is to dereference a pointer to access the data
+             * that the pointer points to. lval is the object we want to dereference. This could be
+             * an identifier or a chain of record.field identifiers. lval^ will then be the value
+             * pointed to
+             * Returns: ExpNode.PointerDereferenceNode
+             * e.g. a^ */
+
+            RESULT = new ExpNode.PointerDereferenceNode(lvalxleft, lval);
         :}
     | error:e
         {:
@@ -636,26 +680,40 @@ Factor ::= PLUS Factor:e
         {:
             RESULT = lval;
         :}
-    |   KW_NEW TypeIdentifier:type
+    |   KW_NEW:newkeyword TypeIdentifier:type
         {:
-            // Pointer value assigned dynamically allocated objects of its base type
-            // via a new expression e.g. "new List in p := new List
-            //TODO return ExpNode.NewPointerNode
+            /* Written to create a pointer to a dynamically allocated object of type "type". May
+             * need to set aside stack frames in code gen later. For now, we want to record the
+             * creation of this object and its type.
+             * Returns: ExpNode.NewPointerNode
+             * e.g. "new List in p := new List */
+            RESULT = new ExpNode.NewPointerNode(newkeywordxleft, type);
         :}
     |   TypeIdentifier:type LCURLY ExpList:list RCURLY
         {:
-            // record constructor r := "Node{2, p}"
-            // TODO return ExpNode.RecordConstructorNode()
+            /* Written to create a new record instance and the assignment of its fields. Its
+             * fields depends on its type. We want to save the type of the record, and the values
+             * given to its fields.
+             * Returns: ExpNode.NewRecordNode
+             * e.g. Node{2, p} where Node is an already defined RecordType */
 
+            RESULT = new ExpNode.NewRecordNode(typexleft, type, list);
         :}
     ;
 ExpList ::= Condition:condition
         {:
-            //TODO return ExpNode.ExpListNode()
+            /* One value */
+            RESULT = new ExpNode.ExpListNode(conditionxleft);
+            RESULT.add(condition);
         :}
     | ExpList:list COMMA Condition:condition
         {:
-
+            /* ExpList holds a list of conditions which are BinaryNodes that represent expressions.
+             * This ExpList is used to store the field values of a record in the order that they
+             * should be assigned (e.g. [2, p]).
+             */
+            list.add(condition);
+            RESULT = list;
         :}
     ;
 UnaryOperator ::= MINUS
