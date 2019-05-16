@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/out/test/a3"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<levels>
+		<level name="java-cup-11b" value="project"/>
+		<level name="jflex-full-1.7.0" value="project"/>
+		<level name="junit:junit:4.12" value="project"/>
+	</levels>
+</component>
