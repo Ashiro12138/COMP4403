@@ -252,10 +252,22 @@ public abstract class StatementNode {
     public static class CallNode extends StatementNode {
         private final String id;
         private SymEntry.ProcedureEntry procEntry;
+        private List actualParams;
 
         public CallNode(Location loc, String id) {
             super(loc);
             this.id = id;
+        }
+
+
+        public CallNode(Location loc, String id, List actualParams) {
+            super(loc);
+            this.id = id;
+            this.actualParams = actualParams;
+        }
+
+        public List getActualParams() {
+            return actualParams;
         }
 
         @Override

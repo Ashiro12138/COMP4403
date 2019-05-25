@@ -471,6 +471,16 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
         return node;
     }
 
+    /**
+     * Actual param node
+     */
+    public ExpNode visitActualParamNode(ExpNode.ActualParamNode node) {
+        beginCheck("ActualParams");
+
+        endCheck("ActualParams");
+        return node;
+    }
+
     //**************************** Support Methods
 
     /**

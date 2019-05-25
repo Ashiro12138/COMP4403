@@ -447,4 +447,46 @@ public abstract class ExpNode {
             return "WidenSubrange(" + exp + ":" + getType() + ")";
         }
     }
+
+    /**
+     * Tree node representing an actual param node
+     */
+    public static class ActualParamNode extends ExpNode {
+        ExpNode condition;
+        String id;
+
+        public ActualParamNode(Location loc, Type type) {
+            super(loc, type);
+        }
+
+        public ActualParamNode(Location loc, String id, ExpNode condition) {
+            super(loc);
+            this.condition = condition;
+            this.id = id;
+        }
+
+        public ExpNode getCondition() {
+            return condition;
+        }
+
+        public String getId() {
+            return id;
+        }
+
+        @Override
+        public ExpNode transform(ExpTransform<ExpNode> visitor) {
+            return visitor.visitActualParamNode(this);
+        }
+
+        @Override
+        public Code genCode(ExpTransform<Code> visitor) {
+            return visitor.visitActualParamNode(this);
+        }
+
+        @Override
+        public String toString() {
+            return "ActualParam(" + id + ")";
+        }
+    }
+
 }

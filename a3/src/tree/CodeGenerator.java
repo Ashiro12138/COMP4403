@@ -403,6 +403,17 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
         endGen("WidenSubrange");
         return code;
     }
+
+    /**
+     * Generate code for an actual parameter
+     */
+    public Code visitActualParamNode(ExpNode.ActualParamNode node) {
+        beginGen("ActualParams");
+        Code code = node.getCondition().genCode(this);
+
+        beginGen("ActualParams");
+        return code;
+    }
     //**************************** Support Methods
 
     /**
