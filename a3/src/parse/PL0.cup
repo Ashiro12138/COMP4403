@@ -391,6 +391,14 @@ ProcedureHead ::=
             /* Create a new scope for the symbols local to
              * the procedure. */
             currentScope = currentScope.newScope(procEntry);
+            // Adding formal params to scope
+            for (SymEntry.ParamEntry entry: pl) {
+                if (currentScope.addEntry(entry) == null) {
+                   errors.error(entry.getIdent() + " repeated", entry.getLocation());
+                }
+            }
+            // Adding formal param list to the procedure type
+            procEntry.getType().setFormalParams(pl);
             RESULT = procEntry;
         :}
     |  KW_PROCEDURE IDENTIFIER:id error
@@ -469,6 +477,13 @@ FormalParam ::= KW_VAR IDENTIFIER:id COLON TypeIdentifier:typeId DefaultLValue:l
             paramEntry.setScope(currentScope);
             RESULT = paramEntry;
         :}
+      | error:e
+        {:
+            SymEntry.ParamEntry paramEntry = new SymEntry.ParamEntry("formalParamError", exleft,
+                new Type.ReferenceType(Type.ERROR_TYPE), false);
+            paramEntry.setScope(currentScope);
+            RESULT = paramEntry;
+        :}
       ;
 
 DefaultLValue ::= GETS LValue:lVal
@@ -529,7 +544,7 @@ Statement ::= KW_WHILE Condition:c KW_DO Statement:s
         {: 
             StatementNode.CallNode node = new StatementNode.CallNode(idxleft, id);
             for (ExpNode param: pl) {
-                node.add(pl);
+                node.addActualParam(param);
             }
             RESULT = node;
         :}
@@ -563,7 +578,19 @@ ActualParamList ::= ActualParam:actual
         :}
     | ActualParamList:list COMMA ActualParam:actual
         {:
-            list.add(actual);
+            ExpNode.ActualParamNode asNode = (ExpNode.ActualParamNode) actual;
+            String id = asNode.getFormalId();
+            boolean duplicate = false;
+            for (ExpNode node: list) {
+                ExpNode.ActualParamNode testActualNode = (ExpNode.ActualParamNode) node;
+                if (testActualNode.getFormalId().equals(id)) {
+                    errors.error(id + " repeated", actual.getLocation());
+                    duplicate = true;
+                }
+            }
+            if (!duplicate) {
+                list.add(actual);
+            }
             RESULT = list;
         :}
     ;
