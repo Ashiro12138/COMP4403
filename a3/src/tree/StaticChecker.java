@@ -1,9 +1,7 @@
 package tree;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.lang.ref.Reference;
+import java.util.*;
 
 import source.VisitorDebugger;
 import source.Errors;
@@ -171,6 +169,90 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
             staticError("Procedure identifier required", node.getLocation());
             endCheck("Call");
             return;
+        }
+
+        // Need to also check the parameters
+        List<ExpNode> actualParams = node.getActualParamList();
+        Type.ProcedureType procType = procEntry.getType();
+        List<SymEntry.ParamEntry> formalParams = procType.getFormalParams();
+        List idCheck = new ArrayList<String>();
+
+        if (actualParams.size() > formalParams.size()) {
+            staticError("Too many parameters", node.getLocation());
+            return;
+        }
+
+        for (SymEntry.ParamEntry formalParam: formalParams) {
+
+            // id <- exp, where id is a formal parameter of p and exp is its expression
+            String formalId = formalParam.getIdent();
+
+            for (ExpNode actual: actualParams) {
+                actual.transform(this);
+                if (!(actual instanceof ExpNode.ActualParamNode)) {
+                    staticError("Expected actual param", actual.getLocation());
+                    return;
+                }
+                ExpNode.ActualParamNode actualNode = (ExpNode.ActualParamNode) actual;
+
+                if (formalId.contentEquals(actualNode.getFormalId())) {
+                    ExpNode condition = actualNode.getCondition();
+                    //Type.ReferenceType formalType = formalParam.getType();
+                    Type formalBaseType = formalParam.getType().getBaseType();
+                    Type conditionType = condition.getType();
+
+                    if (formalParam.isRef()) {
+                        if (conditionType instanceof Type.ReferenceType) {
+                            // if id is a formal reference parameter of type T, exp must be of the type ref(T)
+                            Type actualBaseType =
+                                    ((Type.ReferenceType) conditionType).getBaseType();
+                            if (actualBaseType.equals(formalBaseType)) {
+                                idCheck.add(formalId); // valid
+                                break; // move onto next formal param
+                            } else {
+                                staticError("Reference parameter and formal parameter types do " +
+                                        "not match", condition.getLocation());
+                            }
+                        } else {
+                            staticError("Condition for reference param is not a reference type",
+                                    condition.getLocation());
+                        }
+
+                    } else {
+                        // if id is a formal value parameter of Type T, exp must be assignment compatible with T
+                        // get type and resolve
+                        try {
+                            formalBaseType.coerceToType(condition); // assignment compatibility
+                            idCheck.add(formalId); // valid
+                            break; // move onto next formal param
+                        } catch (Type.IncompatibleTypes err) {
+                            if(conditionType != Type.ERROR_TYPE) {
+                                staticError("Cannot coerce type " + conditionType
+                                        + "to type " + formalBaseType, condition.getLocation());
+                            }
+                        }
+                    }
+                }
+            }
+            // Unable to find an actual param for this formal param, check if has default
+            ExpNode isDefault = formalParam.getDefaultExp();
+            if (!(isDefault instanceof ExpNode.ErrorNode)) {
+                isDefault.transform(this);
+
+            }
+            // A formal parameter to p does not have a corresponding actual parameter in the call
+            // If there exists a default expression -
+                // default exp must be defined in the declaration scope of the procedure
+                // must satosfu the same typing rules as an actual parameter
+
+
+            // An actual param has a type and a formal param associated with it
+            // All formal parameters must be in the actual param list only once
+
+
+            // Each of these actual params must be valid in the calling scope
+            // If the entry is a value param, it must be coercible to the formal param
+            // If the entry if a ref param, it must be a ref(type) of type formal param
         }
         endCheck("Call");
     }
@@ -476,7 +558,10 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
      */
     public ExpNode visitActualParamNode(ExpNode.ActualParamNode node) {
         beginCheck("ActualParams");
-
+        // Only knows the condition
+        ExpNode condition = node.getCondition().transform(this);
+        node.setCondition(condition);
+        // Cannot check anything related to the procedure's declaration scope - see visitCallNode
         endCheck("ActualParams");
         return node;
     }

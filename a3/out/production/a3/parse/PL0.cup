@@ -414,8 +414,7 @@ OptFormalParamList ::= FormalParamList:list
         :}
      | /* empty */
         {:
-            // If there is a formal param list, there must at least be one formal param
-            // If there is no formal param list, return empty list
+            // optional formal param list may be empty
             List list = new ArrayList<SymEntry.ParamEntry>();
             RESULT = list;
         :}
@@ -443,7 +442,7 @@ FormalParam ::= KW_VAR IDENTIFIER:id COLON TypeIdentifier:typeId DefaultLValue:l
             // TODO: make typeId ref??
             SymEntry.ParamEntry paramEntry = new SymEntry.ParamEntry(id, idxleft, typeId, true,
             lVal);
-            paramEntry.setDefaultParam(lVal);
+
             // set the scope
             paramEntry.setScope(currentScope);
             RESULT = paramEntry;
@@ -458,7 +457,6 @@ FormalParam ::= KW_VAR IDENTIFIER:id COLON TypeIdentifier:typeId DefaultLValue:l
         {:
              SymEntry.ParamEntry paramEntry = new SymEntry.ParamEntry(id, idxleft, typeId, false,
               con);
-             paramEntry.setDefaultParam(con);
              paramEntry.setScope(currentScope);
              RESULT = paramEntry;
 
@@ -527,11 +525,7 @@ Statement ::= KW_WHILE Condition:c KW_DO Statement:s
        :} 
     |  KW_CALL IDENTIFIER:id LPAREN OptActualParamList:pl RPAREN
         {: 
-            StatementNode.CallNode node = new StatementNode.CallNode(idxleft, id);
-            for (ExpNode param: pl) {
-                node.add(pl);
-            }
-            RESULT = node;
+            RESULT = new StatementNode.CallNode(idxleft, id, pl);
         :}
     |  error:loc
         {: 
@@ -546,7 +540,7 @@ OptActualParamList ::= ActualParamList: list
     | /* empty */
         {:
             // A statement may not have a list of actual params
-            // If it does have a list of actual params, there must be at least 1 actual param
+            // If it does have a list of actual params, there must be at least 1
             // If no list, return an empty list
             List list = new ArrayList<ExpNode>();
             RESULT = list;

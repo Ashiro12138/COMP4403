@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2808e4f8-30f6-4644-a734-3373252123c1" name="Default Changelist" comment="" />
+    <list default="true" id="2808e4f8-30f6-4644-a734-3373252123c1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../a2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../a2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../a2/src/parse/CUPParser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../a2/src/parse/CUPParser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../a2/src/parse/PL0.cup" beforeDir="false" afterPath="$PROJECT_DIR$/../a2/src/parse/PL0.cup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../a2/src/syms/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/../a2/src/syms/Type.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../a2/src/tree/CodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/../a2/src/tree/CodeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../a2/src/tree/ExpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/../a2/src/tree/ExpNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../a2/src/tree/ExpTransform.java" beforeDir="false" afterPath="$PROJECT_DIR$/../a2/src/tree/ExpTransform.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../a2/src/tree/StaticChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/../a2/src/tree/StaticChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/parse/PL0.cup" beforeDir="false" afterPath="$PROJECT_DIR$/src/parse/PL0.cup" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tree/ExpNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tree/ExpNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tree/StatementNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tree/StatementNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tree/StaticChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tree/StaticChecker.java" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,17 +32,164 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/parse/PL0.cup">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="419" column="10" selection-start-line="419" selection-start-column="10" selection-end-line="419" selection-end-column="10" />
+            <state relative-caret-position="576">
+              <caret line="577" column="42" selection-start-line="577" selection-start-column="25" selection-end-line="577" selection-end-column="42" />
+              <folding>
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#106#107#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#84#85#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#94#95#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#83#84#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#83#84#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#83#84#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#117#118#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#82#83#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#118#119#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#117#118#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#83#84#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#108#109#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#81#82#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#80#81#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#97#98#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#98#99#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#98#99#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#95#96#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#98#99#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#98#99#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#80#81#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#94#95#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#94#95#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#80#81#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#94#95#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#94#95#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#81#82#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#116#117#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#80#81#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#83#84#0" expanded="true" />
+                <element signature="e#46#47#0" expanded="true" />
+                <element signature="e#94#95#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/parse/CUPParser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2">
+              <caret line="1227" column="26" selection-start-line="1227" selection-start-column="26" selection-end-line="1227" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tree/StatementNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="281">
+              <caret line="346" column="38" selection-start-line="346" selection-start-column="29" selection-end-line="346" selection-end-column="38" />
+              <folding>
+                <element signature="e#6969#6970#0" expanded="true" />
+                <element signature="e#7017#7018#0" expanded="true" />
+                <element signature="e#7044#7045#0" expanded="true" />
+                <element signature="e#7087#7088#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test-pgm/test-base0-abs.pl0">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tree/ExpNode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="471">
+              <caret line="477" column="24" selection-start-line="477" selection-start-column="24" selection-end-line="477" selection-end-column="24" />
+              <folding>
+                <element signature="e#6091#6092#0" expanded="true" />
+                <element signature="e#6124#6125#0" expanded="true" />
+                <element signature="e#6160#6161#0" expanded="true" />
+                <element signature="e#6195#6196#0" expanded="true" />
+                <element signature="e#6240#6241#0" expanded="true" />
+                <element signature="e#6280#6281#0" expanded="true" />
+                <element signature="e#12085#12086#0" expanded="true" />
+                <element signature="e#12135#12136#0" expanded="true" />
+                <element signature="e#12262#12263#0" expanded="true" />
+                <element signature="e#12340#12341#0" expanded="true" />
+                <element signature="e#12748#12749#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/tree/StaticChecker.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="575">
+              <caret line="207" column="78" lean-forward="true" selection-start-line="207" selection-start-column="78" selection-end-line="207" selection-end-column="78" />
+              <folding>
+                <element signature="e#23163#23164#0" expanded="true" />
+                <element signature="e#23328#23329#0" expanded="true" />
+                <element signature="e#23461#23462#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/syms/Type.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="1101" column="26" selection-start-line="1101" selection-start-column="24" selection-end-line="1101" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/syms/SymEntry.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="279" column="58" selection-start-line="279" selection-start-column="58" selection-end-line="279" selection-end-column="58" />
+            <state relative-caret-position="648">
+              <caret line="293" column="20" lean-forward="true" selection-start-line="293" selection-start-column="20" selection-end-line="293" selection-end-column="20" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#5599#5600#0" expanded="true" />
+                <element signature="e#5661#5662#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -37,31 +198,68 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>symbol_from_nam</find>
-      <find>symbol_name_from_id</find>
+      <find>ActualParamList</find>
+      <find>list</find>
+      <find>symtab</find>
+      <find>FormalParams</find>
+      <find>FormalParam</find>
+      <find>new List</find>
+      <find>SymTable</find>
+      <find>error</find>
+      <find>CallNode</find>
+      <find>entry</find>
+      <find>callNode</find>
+      <find>.visit</find>
+      <find>visitProcedure</find>
+      <find>procedu</find>
+      <find>coerceToType</find>
+      <find>coerce</find>
+      <find>compatible</find>
+      <find>Condition</find>
+      <find>visitActual</find>
+      <find>compatible</find>
+      <find>referenceType</find>
+      <find>ReferenceType</find>
+      <find>coerceExp</find>
+      <find>var</find>
+      <find>ActualParam</find>
+      <find>Re</find>
+      <find>ExpNode.ErrorNode</find>
+      <find>condition</find>
+      <find>type</find>
+      <find>VarE</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/run_tests_LALR.sh" />
-        <option value="$PROJECT_DIR$/src/parse/PL0.cup" />
+        <option value="$PROJECT_DIR$/src/PL0.cup" />
         <option value="$PROJECT_DIR$/src/syms/SymEntry.java" />
+        <option value="$PROJECT_DIR$/src/tree/ExpTransform.java" />
+        <option value="$PROJECT_DIR$/src/tree/CodeGenerator.java" />
+        <option value="$PROJECT_DIR$/src/tree/StatementNode.java" />
+        <option value="$PROJECT_DIR$/src/tree/ExpNode.java" />
+        <option value="$PROJECT_DIR$/src/parse/PL0.cup" />
+        <option value="$PROJECT_DIR$/src/tree/StaticChecker.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="x" value="611" />
-    <option name="y" value="23" />
-    <option name="width" value="1431" />
-    <option name="height" value="1417" />
+    <option name="x" value="1280" />
+    <option name="y" value="-640" />
+    <option name="width" value="2560" />
+    <option name="height" value="1440" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -119,6 +317,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -127,6 +326,7 @@
     <property name="Repository.Attach.Annotations" value="false" />
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1558792580904" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -207,24 +407,42 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Test_LALR - 2019.05.04 at 16h 31m 41s.xml">
-      <configuration name="Test_LALR" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="Test_LALR - 2019.05.04 at 16h 42m 30s.xml">
-      <configuration name="Test_LALR" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="Test_LALR - 2019.05.05 at 06h 40m 09s.xml">
       <configuration name="Test_LALR" configurationId="JUnit" />
     </history-entry>
     <history-entry file="Test_LALR - 2019.05.06 at 12h 51m 12s.xml">
       <configuration name="Test_LALR" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="Test_LALR - 2019.05.16 at 15h 48m 53s.xml">
+      <configuration name="Test_LALR" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Test_LALR - 2019.05.25 at 20h 23m 14s.xml">
+      <configuration name="Test_LALR" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Test_LALR - 2019.05.25 at 20h 28m 59s.xml">
+      <configuration name="Test_LALR" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Test_LALR - 2019.05.25 at 20h 34m 43s.xml">
+      <configuration name="Test_LALR" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Test_LALR - 2019.05.25 at 20h 35m 35s.xml">
+      <configuration name="Test_LALR" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Test_LALR - 2019.05.25 at 20h 41m 39s.xml">
+      <configuration name="Test_LALR" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Test_LALR - 2019.05.25 at 20h 46m 55s.xml">
+      <configuration name="Test_LALR" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="Test_LALR - 2019.05.25 at 20h 54m 07s.xml">
+      <configuration name="Test_LALR" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="275" y="23" width="1164" height="1417" extended-state="0" />
+    <frame x="1280" y="-640" width="2560" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26607144" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23073868" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -233,8 +451,8 @@
       <window_info id="Learn" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3809524" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.329927" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.19343066" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -242,7 +460,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32955405" />
+      <window_info anchor="bottom" id="Messages" order="10" weight="0.32919708" />
       <window_info anchor="bottom" id="CheckStyle" order="11" />
       <window_info anchor="bottom" id="FindBugs-IDEA" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -259,13 +477,6 @@
     <entry file="file://$PROJECT_DIR$/test-pgm/test-param-00.pl0" />
     <entry file="file://$PROJECT_DIR$/test-pgm/test-param-01-one-param.pl0" />
     <entry file="file://$PROJECT_DIR$/test-pgm/test-param-0.pl0" />
-    <entry file="file://$PROJECT_DIR$/src/pl0/TestRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/run_tests_LALR.sh">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -283,13 +494,6 @@
     <entry file="file://$PROJECT_DIR$/src/parse/PL0.flex">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/parse/CUPParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/syms/Scope.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
@@ -297,24 +501,226 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test-pgm/test-paramref-4-err.pl0">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-pgm/test-paramid-03.pl0">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-pgm/test-paramid-19.pl0">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PL0.cup">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="603">
+          <caret line="155" column="35" selection-start-line="155" selection-start-column="35" selection-end-line="155" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-pgm/test-base6-fwd.pl0">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-pgm/test-basee-forward.pl0">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-pgm/test-base1-assign-const.pl0">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tree/ExpTransform.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="66" selection-start-line="26" selection-start-column="66" selection-end-line="26" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tree/CodeGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="698">
+          <caret line="411" column="47" selection-start-line="411" selection-start-column="47" selection-end-line="411" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pl0/TestRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="82" selection-start-line="82" selection-end-line="82" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/parse/CUPParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2">
+          <caret line="1227" column="26" selection-start-line="1227" selection-start-column="26" selection-end-line="1227" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tree/DeclNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="628">
+          <caret line="88" column="24" lean-forward="true" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tree/StatementNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="281">
+          <caret line="346" column="38" selection-start-line="346" selection-start-column="29" selection-end-line="346" selection-end-column="38" />
+          <folding>
+            <element signature="e#6969#6970#0" expanded="true" />
+            <element signature="e#7017#7018#0" expanded="true" />
+            <element signature="e#7044#7045#0" expanded="true" />
+            <element signature="e#7087#7088#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-pgm/test-paramid-13.pl0">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-pgm/test-basef-coerce.pl0">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/syms/Type.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="898" column="51" lean-forward="true" selection-start-line="898" selection-start-column="51" selection-end-line="898" selection-end-column="51" />
+        <state relative-caret-position="330">
+          <caret line="1101" column="26" selection-start-line="1101" selection-start-column="24" selection-end-line="1101" selection-end-column="26" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/parse/PL0.cup">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="419" column="10" selection-start-line="419" selection-start-column="10" selection-end-line="419" selection-end-column="10" />
+        <state relative-caret-position="576">
+          <caret line="577" column="42" selection-start-line="577" selection-start-column="25" selection-end-line="577" selection-end-column="42" />
+          <folding>
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#106#107#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#84#85#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#94#95#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#83#84#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#83#84#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#83#84#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#117#118#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#82#83#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#118#119#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#117#118#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#83#84#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#108#109#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#81#82#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#80#81#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#97#98#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#98#99#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#98#99#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#95#96#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#98#99#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#98#99#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#80#81#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#94#95#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#94#95#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#80#81#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#94#95#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#94#95#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#81#82#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#116#117#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#80#81#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#83#84#0" expanded="true" />
+            <element signature="e#46#47#0" expanded="true" />
+            <element signature="e#94#95#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tree/ExpNode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="477" column="24" selection-start-line="477" selection-start-column="24" selection-end-line="477" selection-end-column="24" />
+          <folding>
+            <element signature="e#6091#6092#0" expanded="true" />
+            <element signature="e#6124#6125#0" expanded="true" />
+            <element signature="e#6160#6161#0" expanded="true" />
+            <element signature="e#6195#6196#0" expanded="true" />
+            <element signature="e#6240#6241#0" expanded="true" />
+            <element signature="e#6280#6281#0" expanded="true" />
+            <element signature="e#12085#12086#0" expanded="true" />
+            <element signature="e#12135#12136#0" expanded="true" />
+            <element signature="e#12262#12263#0" expanded="true" />
+            <element signature="e#12340#12341#0" expanded="true" />
+            <element signature="e#12748#12749#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test-pgm/test-base0-abs.pl0">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/syms/SymEntry.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="279" column="58" selection-start-line="279" selection-start-column="58" selection-end-line="279" selection-end-column="58" />
+        <state relative-caret-position="648">
+          <caret line="293" column="20" lean-forward="true" selection-start-line="293" selection-start-column="20" selection-end-line="293" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#5599#5600#0" expanded="true" />
+            <element signature="e#5661#5662#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tree/StaticChecker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="207" column="78" lean-forward="true" selection-start-line="207" selection-start-column="78" selection-end-line="207" selection-end-column="78" />
+          <folding>
+            <element signature="e#23163#23164#0" expanded="true" />
+            <element signature="e#23328#23329#0" expanded="true" />
+            <element signature="e#23461#23462#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

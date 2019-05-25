@@ -453,24 +453,33 @@ public abstract class ExpNode {
      */
     public static class ActualParamNode extends ExpNode {
         ExpNode condition;
-        String id;
+        String formalId;
+        Type type;
 
         public ActualParamNode(Location loc, Type type) {
             super(loc, type);
+            this.type = type;
         }
 
-        public ActualParamNode(Location loc, String id, ExpNode condition) {
+        public ActualParamNode(Location loc, String formalId, ExpNode condition) {
             super(loc);
             this.condition = condition;
-            this.id = id;
+            this.formalId = formalId;
+            this.type = type;
         }
+
+        public void setCondition(ExpNode condition) {
+            this.condition = condition;
+        }
+
+        public Type getType() {return type;}
 
         public ExpNode getCondition() {
             return condition;
         }
 
-        public String getId() {
-            return id;
+        public String getFormalId() {
+            return formalId;
         }
 
         @Override
@@ -485,7 +494,7 @@ public abstract class ExpNode {
 
         @Override
         public String toString() {
-            return "ActualParam(" + id + ")";
+            return "ActualParam(" + formalId + ")";
         }
     }
 

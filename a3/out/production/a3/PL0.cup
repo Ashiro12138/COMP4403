@@ -114,6 +114,7 @@ terminal
     KW_VAR,       /* var */
     KW_WHILE,     /* while */
     KW_WRITE,     /* write */
+    KW_VAR,       /* var */
     ILLEGAL;      /* illegal symbol - not used in grammar */
 
 /** The following terminal symbols have an attribute associated with them.
@@ -151,10 +152,8 @@ non terminal                  VarDeclSeq,
                               VarDecl;
 non terminal DeclNode.ProcedureNode  ProcedureDef;
 non terminal SymEntry.ProcedureEntry ProcedureHead;
-non terminal List<SymEntry.ParamEntry> FormalParamList,
-                                       OptFormalParamList;
-non terminal List<ExpNode>    ActualParamList,
-                              OptActualParamList;
+non terminal List<SymEntry.ParamEntry>    FormalParamList,
+                              ActualParamList;
 non terminal List<StatementNode> StatementList;
 non terminal StatementNode    Statement,
                               CompoundStatement;
@@ -163,17 +162,14 @@ non terminal ExpNode          Condition,
                               Exp,
                               Term,
                               Factor;
+non terminal ExpNode          ActualParam;
 non terminal Operator         Relation,
                               AddOp,
                               MulOp,
                               UnaryOperator;
 non terminal ExpNode          LValue;
-non terminal SymEntry.ParamEntry FormalParam;
-non terminal ExpNode          ActualParam;
 non terminal ExpNode          DefaultLValue,
                               DefaultCon;
-
-
 /**-------------------------------------------------------------
  *------------------------ GRAMMAR RULES
  *--------------------------------------------------------------
@@ -372,9 +368,8 @@ ProcedureDef ::= ProcedureHead:procEntry EQUALS Block:b SEMICOLON
         :}
     ;
 
-ProcedureHead ::=
-       KW_PROCEDURE IDENTIFIER:id
-            LPAREN OptFormalParamList:pl
+ProcedureHead ::= KW_PROCEDURE IDENTIFIER:id
+            LPAREN FormalParamList:pl 
             RPAREN
         {:
             /* Add an entry for the procedure to the current scope */
@@ -408,80 +403,9 @@ ProcedureHead ::=
     ;
 
 
-OptFormalParamList ::= FormalParamList:list
-        {:
-            RESULT = list;
-        :}
-     | /* empty */
-        {:
-            // If there is a formal param list, there must at least be one formal param
-            // If there is no formal param list, return empty list
-            List list = new ArrayList<SymEntry.ParamEntry>();
-            RESULT = list;
-        :}
-    ;
 /* To allow for the addition of procedure parameters. */
-FormalParamList ::= FormalParam:param
-         {:
-            // must contain at least one param
-            // FormalParam should be of type SymEntry
-            List list = new ArrayList<SymEntry.ParamEntry>();
-            list.add(param);
-            RESULT = list;
-         :}
-     | FormalParamList:list COMMA FormalParam:param
-        {:
-            list.add(param);
-            RESULT = list;
-        :}
-      ;
-
-
-FormalParam ::= KW_VAR IDENTIFIER:id COLON TypeIdentifier:typeId DefaultLValue:lVal
-        {:
-            // make a new SymEntry.ParamEntry
-            // TODO: make typeId ref??
-            SymEntry.ParamEntry paramEntry = new SymEntry.ParamEntry(id, idxleft, typeId, true,
-            lVal);
-            paramEntry.setDefaultParam(lVal);
-            // set the scope
-            paramEntry.setScope(currentScope);
-            RESULT = paramEntry;
-        :}
-      | KW_VAR IDENTIFIER:id COLON TypeIdentifier:typeId
-        {:
-            SymEntry.ParamEntry paramEntry = new SymEntry.ParamEntry(id, idxleft, typeId, true);
-            paramEntry.setScope(currentScope);
-            RESULT = paramEntry;
-        :}
-      |   IDENTIFIER:id COLON TypeIdentifier:typeId DefaultCon:con
-        {:
-             SymEntry.ParamEntry paramEntry = new SymEntry.ParamEntry(id, idxleft, typeId, false,
-              con);
-             paramEntry.setDefaultParam(con);
-             paramEntry.setScope(currentScope);
-             RESULT = paramEntry;
-
-        :}
-      | IDENTIFIER:id COLON TypeIdentifier:typeId
-        {:
-            SymEntry.ParamEntry paramEntry = new SymEntry.ParamEntry(id, idxleft, typeId, false);
-            paramEntry.setScope(currentScope);
-            RESULT = paramEntry;
-        :}
-      ;
-
-DefaultLValue ::= GETS LValue:lVal
-        {:
-            RESULT = lVal;
-        :}
-   ;
-DefaultCon ::= GETS Condition:con
-        {:
-            RESULT = con;
-         :}
-     ;
-
+FormalParamList ::= /* empty */
+    ;
 CompoundStatement ::= KW_BEGIN StatementList:sl KW_END
         {:
             RESULT = new StatementNode.ListNode(slxleft,sl);
@@ -525,13 +449,9 @@ Statement ::= KW_WHILE Condition:c KW_DO Statement:s
        {:
           RESULT = new StatementNode.AssignmentNode(lvalxleft, lval, rval);
        :} 
-    |  KW_CALL IDENTIFIER:id LPAREN OptActualParamList:pl RPAREN
+    |  KW_CALL IDENTIFIER:id LPAREN ActualParamList:pl RPAREN
         {: 
-            StatementNode.CallNode node = new StatementNode.CallNode(idxleft, id);
-            for (ExpNode param: pl) {
-                node.add(pl);
-            }
-            RESULT = node;
+            RESULT = new StatementNode.CallNode(idxleft, id);
         :}
     |  error:loc
         {: 
@@ -539,23 +459,11 @@ Statement ::= KW_WHILE Condition:c KW_DO Statement:s
         :}
     ;
 
-OptActualParamList ::= ActualParamList: list
-        {:
-            RESULT = list;
-        :}
-    | /* empty */
-        {:
-            // A statement may not have a list of actual params
-            // If it does have a list of actual params, there must be at least 1 actual param
-            // If no list, return an empty list
-            List list = new ArrayList<ExpNode>();
-            RESULT = list;
-        :}
-    ;
+
 ActualParamList ::= ActualParam:actual
         {:
             // No empty case, must have at least one actual param
-           List list = new ArrayList<ExpNode>();
+           List list = new List<ExpNode>();
            list.add(actual);
            RESULT = list;
            //TODO figure out how to do a default case
@@ -568,14 +476,10 @@ ActualParamList ::= ActualParam:actual
         :}
     ;
 
+
 ActualParam ::= IDENTIFIER:id GETS Condition:cond
         {:
             RESULT = new ExpNode.ActualParamNode(idxleft, id, cond);
-        :}
-    | IDENTIFIER:id error:e
-        {:
-            // error recovery at the bottom level of the parsing chain
-            RESULT = new ExpNode.ErrorNode(idxleft);
         :}
     ;
 
@@ -706,4 +610,43 @@ UnaryOperator ::= MINUS
             RESULT = Operator.NEG_OP;
         :}
     ;
+
+FormalParamList ::= FormalParam:param
+         {:
+            // must contain at least one param
+            // TODO make into sym entry whatever that is
+            List list = new List<ExpNode>();
+            list.add(param);
+            RESULT = list;
+         :}
+     | FormalParams:list COMMA FormalParam:param
+        {:
+            list.add(param);
+            RESULT = list;
+        :}
+      ;
+
+
+FormalParam ::= KW_VAR IDENTIFIER:id COLON TypeIdentifier:typeId DefaultLValue:lVal
+        {:
+
+
+        :}
+      |   IDENTIFIER:id COLON TypeIdentifier:typeId DefaultCon:con
+        {:
+
+
+        :}
+       ;
+
+DefaultLValue ::= GETS LValue:lVal
+        {:
+            RESULT = lVal;
+        :}
+   ;
+DefaultCon ::= GETS Condition:con
+        {:
+            RESULT = con;
+         :}
+     ;
 
