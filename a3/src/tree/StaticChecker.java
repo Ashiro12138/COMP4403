@@ -67,13 +67,9 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
      */
     public void visitProcedureNode(DeclNode.ProcedureNode node) {
         beginCheck("Procedure");
-        SymEntry.ProcedureEntry procEntry = node.getProcEntry();
-       /* System.out.println("original visitProcedureNode scope level " + procEntry.getLocalScope
-       ().getLevel() +
+        System.out.println("In Procedure Node");
 
-                "for" +
-                " procedure " + procEntry.getIdent());*/
-        // Assign a code block to the procedure entry
+        SymEntry.ProcedureEntry procEntry = node.getProcEntry();
         procEntry.setBlock(node.getBlock());
 
         // The local scope is that for the procedure.
@@ -84,14 +80,8 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
         // Enter the local scope
         currentScope = localScope;
 
-
-     /*   System.out.println("In visitProcedureNode, scope level is " + currentScope.getLevel() +
-                "for" +
-                " procedure " + procEntry.getIdent());*/
-        // current scope is the declaration scope
         Type.ProcedureType procType = procEntry.getType();
         List<SymEntry.ParamEntry> formalParams = procType.getFormalParams();
-        // List<ExpNode> defaults = new ArrayList<>();
 
         HashMap<SymEntry.ParamEntry, ExpNode> defaults = new HashMap<>();
 
@@ -99,14 +89,16 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
             // Get all formal params that have default values
             ExpNode defaultExp = param.getDefaultExp();
             try {
-              //  defaultExp.transform(this);
-                defaults.put(param, defaultExp.transform(this));
+                ExpNode transformedDefault =  defaultExp.transform(this);
+                param.setDefaultParam(transformedDefault);
+                defaults.put(param, transformedDefault);
             } catch (NullPointerException e) {
-                // Default does not exist, which is ok unless needed in a call
+                // Default does not exist, which is okay for now, handled in a call
             }
         }
-        this.checkFormalParams(defaults, true);
 
+        // Default expressions are valid in the parent scope
+        this.checkFormalParams(defaults, true, currentScope.getParent());
 
         // Check the block of the procedure.
         visitBlockNode(node.getBlock());
@@ -117,70 +109,75 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
 
     /**
      * Helper method to type check exp nodes against formal params.
-     * Iterates through all entries and type checks.
+     * Iterates through all entries and type checks. The defaultCheck toggle is for more accurate
+     * error messages. The scope is the lowest scope to search.
      */
     private void checkFormalParams(HashMap<SymEntry.ParamEntry, ExpNode> toTypeCheck,
-                                   boolean defaultCheck) {
-        // Type checking
-      //  System.out.println("In checkFormalParams " + currentScope.getLevel());
+                                   boolean defaultCheck, Scope scope) {
 
+      //  System.out.println("... checking "+toTypeCheck.keySet().size() + " matches");
+      //      System.out.println(toTypeCheck.toString());
         for (SymEntry.ParamEntry formalParam: toTypeCheck.keySet()) {
             // Formal param type
-            Type formalBaseType = formalParam.getType().getBaseType();
-
+         //   Type formalBaseType = formalParam.getType().getBaseType();
+            Type formalType = formalParam.getType();
+          //  System.out.println("formal param " + formalParam.getIdent() + " has type "
+            //  +formalType);
             // Find exp node type in scope
             ExpNode value = toTypeCheck.get(formalParam);
+           // System.out.println("actual/default param has type " + value.getType() + " and is...");
             Type conditionType;
-
-        //    System.out.println("original value.type is"+ value.getType());
 
             if (value instanceof ExpNode.ConstNode) {
                 ExpNode.ConstNode valAsConst = (ExpNode.ConstNode) value;
                 conditionType = valAsConst.getType();
                 value.setType(conditionType);
-            //    System.out.println("const value.type is"+ value.getType());
+                System.out.println("a const value with type "+ value.getType());
 
             } else if (value instanceof ExpNode.VariableNode) {
                 ExpNode.VariableNode valueAsVar = (ExpNode.VariableNode) value;
                 // Look up type in scope
                 String varId = valueAsVar.getVariable().getIdent();
-                SymEntry.VarEntry varEntry = currentScope.lookupVariable(varId);
+                System.out.println(scope.getLevel() +" and parent level is "+
+                        scope.getParent().getLevel());
+                SymEntry.VarEntry varEntry = scope.lookupVariable(varId);
                 conditionType = varEntry.getType();
                 value.setType(conditionType);
-            //    System.out.println("val value.type is"+ value.getType());
+                System.out.println("a var node with type "+ value.getType());
 
-            } else {
-             //   System.out.println("val instanceof "+value.getClass());
+            } else  {
+               // return;
+                try {
+                    System.out.println(value.getClass());
+                } catch (NullPointerException e) {
+                    System.out.println("probably not instantiated");
+                }
             }
 
-
             if (formalParam.isRef()) {
-            //    System.out.println("ref value.type is"+ value.getType());
-
                 if (value.getType() instanceof Type.ReferenceType) {
-                    // if id is a formal reference parameter of type T, exp must be of the type ref(T)
-                    Type actualBaseType =
-                            ((Type.ReferenceType) value.getType()).getBaseType();
-                    if (actualBaseType.equals(formalBaseType)) {
-                        break; // move onto next formal param
-                    } else {
-                        if (defaultCheck) {
-                            // Default error
-                            staticError("default expression must be of type " + formalParam.getType(), value.getLocation());
-                        } else {
-                            staticError("actual parameter type should be " + formalParam.getType() +
-                                    " not " + value.getType(), value.getLocation());
-
-                        }
+                    Type deref = value.getType().getScalarType();
+                    System.out.println("comparing " + formalParam.getType().resolveType() + " to " + value.getType().resolveType() + "or scalar " + deref);
+                    if (formalParam.getType().equals(value.getType())) {
+                        System.out.println("ok");
+                        continue; // move onto next formal param
                     }
-                } /*else {
-                    staticError("default expression must be of type "+ value.getType(),
-                            value.getLocation());
-                }*/
+                }
+                System.out.println("actual/default type should be " + formalParam.getType() +
+                        " not " + value.getType());
+                if (defaultCheck) {
+                    // Default error
+                    staticError("default expression must be of type " + formalParam.getType(), value.getLocation());
+                } else {
+                    staticError("actual parameter type should be " + formalParam.getType() +
+                            " not " + value.getType(), value.getLocation());
+                }
             } else {
                 value.getType().resolveType();
-                formalBaseType.coerceExp(value); // assignment compatibility
+                Type formalBaseType = formalParam.getType().getBaseType();
+                System.out.println("attempting to coerce non-ref param " + value.getType().resolveType() + " to " + formalBaseType);
 
+                formalBaseType.coerceExp(value); // assignment compatibility
             }
         }
 
@@ -260,10 +257,15 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
 
 
     /**
-     * Call statement node
+     * Call statement node. An actual param has a type and a formal param associated with it
+     * All formal parameters must be in the actual param list only once. Each of these actual
+     * params must be valid in the calling scope. If the entry is a value param, it must be
+     * coercible to the formal param. If the entry if a ref param, it must be a ref(type) of type
+     * formal param.
      */
     public void visitCallNode(StatementNode.CallNode node) {
         beginCheck("Call");
+        System.out.println("In Call Node");
         SymEntry.ProcedureEntry procEntry;
         // Look up the symbol table entry for the procedure.
         SymEntry entry = currentScope.lookup(node.getId());
@@ -277,7 +279,6 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
         }
 
         // Need to also check the parameters
-
         // List stores transformed actual param nodes
         List<ExpNode.ActualParamNode> actualParams = new ArrayList<>();
         // Id and location map used to verify all actual parameters are valid formal parameters
@@ -305,6 +306,7 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
                 staticError("Expected actual param", actual.getLocation());
             }
             ExpNode.ActualParamNode actualNode = (ExpNode.ActualParamNode) actual;
+            node.getActualParamList().set(i, actualNode);
             // Get ids of all actual parameters
             if (!actualIdMap.containsKey(actualNode.getFormalId())) {
                 actualIdMap.put(actualNode.getFormalId(), actualNode.getLocation());
@@ -327,12 +329,16 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
             if (!found) {
                 ExpNode defaultExp = formalParam.getDefaultExp();
                 try {
-                    defaultExp.transform(this);
-                 //   Scope declScope = procEntry.getLocalScope();
-                  //  declSc
-                    toTypeCheck.put(formalParam, defaultExp);
+                    // default params are handled by the Procedure visitor
+                    // if they are still null, and are required in a call, this is an error
+                    if (defaultExp == null) {
+                        staticError("no actual parameter for " + formalId, node.getLocation());
+                    } else {
+                        // already type checked once
+                        // do somethings
+                    }
+
                 } catch (NullPointerException e) {
-                    staticError("no actual parameter for " + formalId, node.getLocation());
                 }
             }
 
@@ -346,27 +352,7 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
                 staticError("not a parameter of procedure", actualIdMap.get(id));
             }
         }
-
-    //    System.out.print("IN visitCallNode " + currentScope.getLevel());
-
-        this.checkFormalParams(toTypeCheck, false);
-
-
-
-            // A formal parameter to p does not have a corresponding actual parameter in the call
-            // If there exists a default expression -
-                // default exp must be defined in the declaration scope of the procedure
-                // must satosfu the same typing rules as an actual parameter
-
-
-            // An actual param has a type and a formal param associated with it
-            // All formal parameters must be in the actual param list only once
-
-
-            // Each of these actual params must be valid in the calling scope
-            // If the entry is a value param, it must be coercible to the formal param
-            // If the entry if a ref param, it must be a ref(type) of type formal param
-
+        this.checkFormalParams(toTypeCheck, false, currentScope);
         endCheck("Call");
     }
 

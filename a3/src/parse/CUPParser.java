@@ -818,6 +818,8 @@ class CUP$CUPParser$actions {
 		 
             // Variables are always of ReferenceType.
             Type.ReferenceType varType = new Type.ReferenceType(type);
+            System.out.println("VarDecl: adding vars to scope level of " + currentScope
+            .getLevel());
             if(currentScope.addVariable(id, idxleft, varType) == null) {
                 errors.error(id + " already declared in this scope", idxleft);
             }
@@ -881,10 +883,12 @@ class CUP$CUPParser$actions {
             /* Create a new scope for the symbols local to
              * the procedure. */
             currentScope = currentScope.newScope(procEntry);
+
             // Adding formal params to scope
+            System.out.println("Adding formal params to scope level " + currentScope.getLevel());
             for (SymEntry.ParamEntry entry: pl) {
                 if (currentScope.addEntry(entry) == null) {
-                   errors.error(entry.getIdent() + " repeated", entry.getLocation());
+                    errors.error(entry.getIdent() + " repeated", entry.getLocation());
                 }
             }
             // Adding formal param list to the procedure type
@@ -996,11 +1000,11 @@ class CUP$CUPParser$actions {
 		ExpNode lVal = (ExpNode)((java_cup.runtime.Symbol) CUP$CUPParser$stack.peek()).value;
 		
             // make a new SymEntry.ParamEntry
-            // TODO: make typeId ref??
             SymEntry.ParamEntry paramEntry = new SymEntry.ParamEntry(id, idxleft, typeId, true,
             lVal);
             paramEntry.setDefaultParam(lVal);
             // set the scope
+            System.out.println("Setting formal param scope in " + currentScope.getLevel());
             paramEntry.setScope(currentScope);
             RESULT = paramEntry;
         

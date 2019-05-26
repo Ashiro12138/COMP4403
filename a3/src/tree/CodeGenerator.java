@@ -1,5 +1,6 @@
 package tree;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
@@ -157,7 +158,56 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
          * procedure's symbol table entry. The actual address is resolved
          * at load time.
          */
+
+        // Load parameters before load call
+        Type.ProcedureType procType = proc.getType();
+        List<SymEntry.ParamEntry> formalParams = procType.getFormalParams();
+        List<ExpNode> actualParams = node.getActualParamList();
+        List<ExpNode> buffer = new ArrayList<>();
+        boolean hasActual;
+        int offset = 0 - (formalParams.size() + 1);
+
+        // Check whether each formal param has an actual param
+        for (SymEntry.ParamEntry formalParam: formalParams) {
+       // for (int i = formalParams.size() - 1; i >= 0; i--) {
+      //      SymEntry.ParamEntry formalParam = formalParams.get(i);
+            String idToFind = formalParam.getIdent();
+            hasActual = false;
+
+            for (ExpNode actualParam: actualParams) {
+                ExpNode.ActualParamNode actualAsNode = (ExpNode.ActualParamNode) actualParam;
+                if (actualAsNode.getFormalId().equals(idToFind)) {
+                    // Use this actual parameter's condition as the value for the formal param
+                   // buffer.add(actualAsNode);
+                    code.append(actualAsNode.genCode(this));
+                    hasActual = true;
+                    break;
+                }
+            }
+
+            if (!hasActual) {
+                // If no actual param, load default instead
+                buffer.add(formalParam.getDefaultExp());
+                code.append(formalParam.getDefaultExp().genCode(this));
+
+            }
+
+            // If ConstExp, would have loaded const value onto stack but if VarExp, would have
+            // loaded the offset from the fp onto stack - need absolute address.
+            if (formalParam.isRef()) {
+                code.generateOp(Operation.TO_GLOBAL);
+            }
+
+            // Params have negative offsets
+            formalParam.setOffset(++offset);
+        }
+
+
         code.genCall(staticLevel - proc.getLevel(), proc);
+
+      //  int paramValueSize = currentScope.getValueParameterSpace();
+      //  code.genDeallocStack(paramValueSize);
+
         endGen("Call");
         return code;
     }
@@ -409,9 +459,11 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
      */
     public Code visitActualParamNode(ExpNode.ActualParamNode node) {
         beginGen("ActualParams");
+
+        // Static checker should have converted to relevant expression type
         Code code = node.getCondition().genCode(this);
 
-        beginGen("ActualParams");
+        endGen("ActualParams");
         return code;
     }
     //**************************** Support Methods
