@@ -308,6 +308,7 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
      */
     private Code genArgsInOrder(ExpNode left, ExpNode right) {
         beginGen("ArgsInOrder");
+
         Code code = left.genCode(this);
         code.append(right.genCode(this));
         endGen("ArgsInOrder");
