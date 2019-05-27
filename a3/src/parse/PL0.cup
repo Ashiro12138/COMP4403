@@ -355,8 +355,6 @@ VarDecl ::= IDENTIFIER:id COLON TypeIdentifier:type SEMICOLON
         {: 
             // Variables are always of ReferenceType.
             Type.ReferenceType varType = new Type.ReferenceType(type);
-            System.out.println("VarDecl: adding vars to scope level of " + currentScope
-            .getLevel());
             if(currentScope.addVariable(id, idxleft, varType) == null) {
                 errors.error(id + " already declared in this scope", idxleft);
             }
@@ -395,7 +393,6 @@ ProcedureHead ::=
             currentScope = currentScope.newScope(procEntry);
 
             // Adding formal params to scope
-            System.out.println("Adding formal params to scope level " + currentScope.getLevel());
             for (SymEntry.ParamEntry entry: pl) {
                 if (currentScope.addEntry(entry) == null) {
                     errors.error(entry.getIdent() + " repeated", entry.getLocation());
@@ -426,8 +423,8 @@ OptFormalParamList ::= FormalParamList:list
         :}
      | /* empty */
         {:
-            // If there is a formal param list, there must at least be one formal param
-            // If there is no formal param list, return empty list
+            /* If there is a formal param list, there must at least be one formal param.
+             * If there is no formal param list, return empty list */
             List list = new ArrayList<SymEntry.ParamEntry>();
             RESULT = list;
         :}
@@ -436,8 +433,7 @@ OptFormalParamList ::= FormalParamList:list
 /* To allow for the addition of procedure parameters. */
 FormalParamList ::= FormalParam:param
          {:
-            // must contain at least one param
-            // FormalParam should be of type SymEntry
+            // Must contain at least one param, FormalParam should be of type SymEntry
             List list = new ArrayList<SymEntry.ParamEntry>();
             list.add(param);
             RESULT = list;
@@ -452,12 +448,11 @@ FormalParamList ::= FormalParam:param
 
 FormalParam ::= KW_VAR IDENTIFIER:id COLON TypeIdentifier:typeId DefaultLValue:lVal
         {:
-            // make a new SymEntry.ParamEntry
+            // Make a new SymEntry.ParamEntry
             SymEntry.ParamEntry paramEntry = new SymEntry.ParamEntry(id, idxleft, typeId, true,
             lVal);
             paramEntry.setDefaultParam(lVal);
-            // set the scope
-            System.out.println("Setting formal param scope in " + currentScope.getLevel());
+            // Set the scope
             paramEntry.setScope(currentScope);
             RESULT = paramEntry;
         :}
@@ -565,9 +560,8 @@ OptActualParamList ::= ActualParamList: list
         :}
     | /* empty */
         {:
-            // A statement may not have a list of actual params
-            // If it does have a list of actual params, there must be at least 1 actual param
-            // If no list, return an empty list
+            /* A statement may not have a list of actual params. If it does have a list of actual
+             * params, there must be at least 1 actual param. If no list, return an empty list. */
             List list = new ArrayList<ExpNode>();
             RESULT = list;
         :}
@@ -578,8 +572,6 @@ ActualParamList ::= ActualParam:actual
            List list = new ArrayList<ExpNode>();
            list.add(actual);
            RESULT = list;
-           //TODO figure out how to do a default case
-           // TODO make into sym entry whatever that is
         :}
     | ActualParamList:list COMMA ActualParam:actual
         {:
@@ -607,7 +599,7 @@ ActualParam ::= IDENTIFIER:id GETS Condition:cond
         :}
     | IDENTIFIER:id error:e
         {:
-            // error recovery at the bottom level of the parsing chain
+            // Error recovery at the bottom level of the parsing chain
             RESULT = new ExpNode.ErrorNode(idxleft);
         :}
     ;

@@ -818,8 +818,6 @@ class CUP$CUPParser$actions {
 		 
             // Variables are always of ReferenceType.
             Type.ReferenceType varType = new Type.ReferenceType(type);
-            System.out.println("VarDecl: adding vars to scope level of " + currentScope
-            .getLevel());
             if(currentScope.addVariable(id, idxleft, varType) == null) {
                 errors.error(id + " already declared in this scope", idxleft);
             }
@@ -885,7 +883,6 @@ class CUP$CUPParser$actions {
             currentScope = currentScope.newScope(procEntry);
 
             // Adding formal params to scope
-            System.out.println("Adding formal params to scope level " + currentScope.getLevel());
             for (SymEntry.ParamEntry entry: pl) {
                 if (currentScope.addEntry(entry) == null) {
                     errors.error(entry.getIdent() + " repeated", entry.getLocation());
@@ -940,8 +937,8 @@ class CUP$CUPParser$actions {
             {
               List<SymEntry.ParamEntry> RESULT =null;
 		
-            // If there is a formal param list, there must at least be one formal param
-            // If there is no formal param list, return empty list
+            /* If there is a formal param list, there must at least be one formal param.
+             * If there is no formal param list, return empty list */
             List list = new ArrayList<SymEntry.ParamEntry>();
             RESULT = list;
         
@@ -957,8 +954,7 @@ class CUP$CUPParser$actions {
 		Location paramxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$CUPParser$stack.peek()).xright;
 		SymEntry.ParamEntry param = (SymEntry.ParamEntry)((java_cup.runtime.Symbol) CUP$CUPParser$stack.peek()).value;
 		
-            // must contain at least one param
-            // FormalParam should be of type SymEntry
+            // Must contain at least one param, FormalParam should be of type SymEntry
             List list = new ArrayList<SymEntry.ParamEntry>();
             list.add(param);
             RESULT = list;
@@ -999,12 +995,11 @@ class CUP$CUPParser$actions {
 		Location lValxright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$CUPParser$stack.peek()).xright;
 		ExpNode lVal = (ExpNode)((java_cup.runtime.Symbol) CUP$CUPParser$stack.peek()).value;
 		
-            // make a new SymEntry.ParamEntry
+            // Make a new SymEntry.ParamEntry
             SymEntry.ParamEntry paramEntry = new SymEntry.ParamEntry(id, idxleft, typeId, true,
             lVal);
             paramEntry.setDefaultParam(lVal);
-            // set the scope
-            System.out.println("Setting formal param scope in " + currentScope.getLevel());
+            // Set the scope
             paramEntry.setScope(currentScope);
             RESULT = paramEntry;
         
@@ -1321,9 +1316,8 @@ class CUP$CUPParser$actions {
             {
               List<ExpNode> RESULT =null;
 		
-            // A statement may not have a list of actual params
-            // If it does have a list of actual params, there must be at least 1 actual param
-            // If no list, return an empty list
+            /* A statement may not have a list of actual params. If it does have a list of actual
+             * params, there must be at least 1 actual param. If no list, return an empty list. */
             List list = new ArrayList<ExpNode>();
             RESULT = list;
         
@@ -1343,8 +1337,6 @@ class CUP$CUPParser$actions {
            List list = new ArrayList<ExpNode>();
            list.add(actual);
            RESULT = list;
-           //TODO figure out how to do a default case
-           // TODO make into sym entry whatever that is
         
               CUP$CUPParser$result = parser.getSymbolFactory().newSymbol("ActualParamList",17, ((java_cup.runtime.Symbol)CUP$CUPParser$stack.peek()), ((java_cup.runtime.Symbol)CUP$CUPParser$stack.peek()), RESULT);
             }
@@ -1408,7 +1400,7 @@ class CUP$CUPParser$actions {
 		Location exright = ((java_cup.runtime.ComplexSymbolFactory.ComplexSymbol)CUP$CUPParser$stack.peek()).xright;
 		Object e = (Object)((java_cup.runtime.Symbol) CUP$CUPParser$stack.peek()).value;
 		
-            // error recovery at the bottom level of the parsing chain
+            // Error recovery at the bottom level of the parsing chain
             RESULT = new ExpNode.ErrorNode(idxleft);
         
               CUP$CUPParser$result = parser.getSymbolFactory().newSymbol("ActualParam",33, ((java_cup.runtime.Symbol)CUP$CUPParser$stack.elementAt(CUP$CUPParser$top-1)), ((java_cup.runtime.Symbol)CUP$CUPParser$stack.peek()), RESULT);

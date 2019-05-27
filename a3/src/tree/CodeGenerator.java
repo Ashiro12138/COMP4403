@@ -1,9 +1,6 @@
 package tree;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.ListIterator;
 
 import machine.Operation;
 import machine.StackMachine;
@@ -206,8 +203,7 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
                 }
 
             }
-            /*
-             * If Const, would have loaded const value onto stack - we skip to loading call.
+            /* If Const, would have loaded const value onto stack - we skip to loading call.
              */
             if (isVar) {
                 if (formalParam.isRef()) {
