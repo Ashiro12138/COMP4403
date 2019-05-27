@@ -128,6 +128,7 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
         beginGen("Assignment");
         /* Generate code to evaluate the expression */
         Code code = node.getExp().genCode(this);
+        node.getVariable();
         /* Generate the code to load the address of the variable */
         code.append(node.getVariable().genCode(this));
         /* Generate the store based on the type/size of value */
@@ -136,6 +137,7 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
         return code;
     }
 
+    //TODO NEEDS TO BE CHANGED HUGE
     /**
      * Generate code for a "write" statement.
      */
@@ -163,14 +165,11 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
         Type.ProcedureType procType = proc.getType();
         List<SymEntry.ParamEntry> formalParams = procType.getFormalParams();
         List<ExpNode> actualParams = node.getActualParamList();
-        List<ExpNode> buffer = new ArrayList<>();
         boolean hasActual;
         int offset = 0 - (formalParams.size() + 1);
 
         // Check whether each formal param has an actual param
         for (SymEntry.ParamEntry formalParam: formalParams) {
-       // for (int i = formalParams.size() - 1; i >= 0; i--) {
-      //      SymEntry.ParamEntry formalParam = formalParams.get(i);
             String idToFind = formalParam.getIdent();
             hasActual = false;
 
@@ -187,7 +186,6 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
 
             if (!hasActual) {
                 // If no actual param, load default instead
-                buffer.add(formalParam.getDefaultExp());
                 code.append(formalParam.getDefaultExp().genCode(this));
 
             }
@@ -202,11 +200,8 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
             formalParam.setOffset(++offset);
         }
 
-
+        // Set up frame
         code.genCall(staticLevel - proc.getLevel(), proc);
-
-      //  int paramValueSize = currentScope.getValueParameterSpace();
-      //  code.genDeallocStack(paramValueSize);
 
         endGen("Call");
         return code;
@@ -308,7 +303,6 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
      */
     private Code genArgsInOrder(ExpNode left, ExpNode right) {
         beginGen("ArgsInOrder");
-
         Code code = left.genCode(this);
         code.append(right.genCode(this));
         endGen("ArgsInOrder");
@@ -415,6 +409,7 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
                 node.getLocation());
         return null;
     }
+    //TODO NEEDS TO BE CHANGED HUGE
 
     /**
      * Generate code for a variable reference.
@@ -424,6 +419,21 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
         beginGen("Variable");
         SymEntry.VarEntry var = node.getVariable();
         Code code = new Code();
+
+        // We are only concerned about if the variable is a ref param
+        if (var instanceof SymEntry.ParamEntry) {
+            SymEntry.ParamEntry param = (SymEntry.ParamEntry) var;
+            if (param.isRef()) {
+                // Need to load absolute address stored in the variable's slot
+                code.genLoadConstant(var.getOffset());
+                code.generateOp(Operation.LOAD_FRAME);
+                // Converts absolute address to frame relative
+                code.generateOp(Operation.TO_LOCAL);
+                endGen("Variable");
+                return code;
+            }
+        }
+            // Need to get address as offset from frame pointer
         code.genMemRef(staticLevel - var.getLevel(), var.getOffset());
         endGen("Variable");
         return code;

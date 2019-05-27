@@ -174,6 +174,7 @@ public abstract class ExpNode {
          * Symbol table entry for the variable
          */
         final SymEntry.VarEntry variable;
+        private boolean isRef = false;
 
         public VariableNode(Location loc, SymEntry.VarEntry variable) {
             super(loc, variable.getType());
