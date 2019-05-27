@@ -156,16 +156,28 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
         beginGen("Call");
         SymEntry.ProcedureEntry proc = node.getEntry();
         Code code = new Code();
-        /* Generate the call instruction. The second parameter is the
-         * procedure's symbol table entry. The actual address is resolved
-         * at load time.
-         */
 
-        // Load parameters before load call
+        /* Load all formal parameters backwards before load call. For each formal parameter, the
+         * value is found as either an actual or a default expression. Visitor generates code
+         * for each expression.
+         *
+         * We want to finish with values of value parameters and absolute addresses of reference
+         * parameters pushed onto the stack, for all the formal parameters.
+         *
+         * This means that if a formal parameter is value parameter, by endGen("Call") it wouldn't
+         * matter whether the value came from a Const or a Variable as long as the correct
+         * value is loaded onto the stack.
+         *
+         * genCode for Const loads the value directly, so nothing else needs to be done.
+         * However, genCode for Variable loads the absolute address if it is a reference
+         * parameter, or it loads the frame relative pointer if it is not. (see
+         * visitVariableNode). Loading the "final" value frame is handled in line 221.
+         */
         Type.ProcedureType procType = proc.getType();
         List<SymEntry.ParamEntry> formalParams = procType.getFormalParams();
         List<ExpNode> actualParams = node.getActualParamList();
         boolean hasActual;
+        boolean isVar = false;
         int offset = 0 - (formalParams.size() + 1);
 
         // Check whether each formal param has an actual param
@@ -177,8 +189,10 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
                 ExpNode.ActualParamNode actualAsNode = (ExpNode.ActualParamNode) actualParam;
                 if (actualAsNode.getFormalId().equals(idToFind)) {
                     // Use this actual parameter's condition as the value for the formal param
-                   // buffer.add(actualAsNode);
                     code.append(actualAsNode.genCode(this));
+                    if (actualAsNode.getCondition() instanceof ExpNode.VariableNode) {
+                        isVar = true;
+                    }
                     hasActual = true;
                     break;
                 }
@@ -187,20 +201,35 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
             if (!hasActual) {
                 // If no actual param, load default instead
                 code.append(formalParam.getDefaultExp().genCode(this));
+                if (formalParam.getDefaultExp() instanceof ExpNode.VariableNode) {
+                    isVar = true;
+                }
 
             }
-
-            // If ConstExp, would have loaded const value onto stack but if VarExp, would have
-            // loaded the offset from the fp onto stack - need absolute address.
-            if (formalParam.isRef()) {
-                code.generateOp(Operation.TO_GLOBAL);
+            /*
+             * If Const, would have loaded const value onto stack - we skip to loading call.
+             */
+            if (isVar) {
+                if (formalParam.isRef()) {
+                    /* If Variable and isRef, would have loaded the offset from the fp onto stack -
+                     * need absolute address.
+                     */
+                    code.generateOp(Operation.TO_GLOBAL);
+                } else {
+                    /* If Variable and is not ref, would have loaded the absolute address -
+                     * need the value at the address.
+                     */
+                    code.generateOp(Operation.LOAD_ABS);
+                }
             }
 
-            // Params have negative offsets
             formalParam.setOffset(++offset);
         }
 
-        // Set up frame
+        /* Generate the call instruction. The second parameter is the
+         * procedure's symbol table entry. The actual address is resolved
+         * at load time.
+         */
         code.genCall(staticLevel - proc.getLevel(), proc);
 
         endGen("Call");
@@ -409,7 +438,6 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
                 node.getLocation());
         return null;
     }
-    //TODO NEEDS TO BE CHANGED HUGE
 
     /**
      * Generate code for a variable reference.
@@ -420,7 +448,10 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
         SymEntry.VarEntry var = node.getVariable();
         Code code = new Code();
 
-        // We are only concerned about if the variable is a ref param
+        /* If the node's variable is a reference parameter, we want to load the address
+         * that is stored in its frame. To be consistent with the return type, it is converted to a
+         * frame pointer relative address.
+         */
         if (var instanceof SymEntry.ParamEntry) {
             SymEntry.ParamEntry param = (SymEntry.ParamEntry) var;
             if (param.isRef()) {
@@ -433,7 +464,8 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
                 return code;
             }
         }
-            // Need to get address as offset from frame pointer
+
+        // Need to get address as offset from frame pointer
         code.genMemRef(staticLevel - var.getLevel(), var.getOffset());
         endGen("Variable");
         return code;
