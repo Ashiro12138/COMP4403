@@ -406,6 +406,31 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
         return code;
     }
 
+    @Override
+    public Code visitExpListNode(ExpNode.ExpListNode node) {
+        return null;
+    }
+
+    @Override
+    public Code visitNewRecordNode(ExpNode.NewRecordNode node) {
+        return null;
+    }
+
+    @Override
+    public Code visitNewPointerNode(ExpNode.NewPointerNode node) {
+        return null;
+    }
+
+    @Override
+    public Code visitRecordFieldAccessNode(ExpNode.RecordFieldAccessNode node) {
+        return null;
+    }
+
+    @Override
+    public Code visitPointerDereferenceNode(ExpNode.PointerDereferenceNode node) {
+        return null;
+    }
+
     //**************************** Support Methods ***************************
 
     /**

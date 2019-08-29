@@ -1,6 +1,7 @@
 package tree;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import java_cup.runtime.ComplexSymbolFactory.Location;
@@ -452,7 +453,7 @@ public abstract class ExpNode {
         }
     }
 
-    /* -------------------- Correct structures --------------------*/
+    /* -------------------- Added Nodes --------------------*/
 
     /**
      * Tree node representing an ExpList
@@ -494,7 +495,7 @@ public abstract class ExpNode {
 
         @Override
         public ExpNode transform(ExpTransform<ExpNode> visitor) {
-            return null;
+            return visitor.visitExpListNode(this);
         }
 
         @Override
@@ -507,22 +508,37 @@ public abstract class ExpNode {
      * Tree node representing a record made from the constructor
      */
     public static class NewRecordNode extends ExpNode {
-        ExpNode fields;
+        private ExpNode initFields;
+        private Type type;
+        private HashMap<String, ExpNode> record;
 
-        public NewRecordNode(Location loc, Type type, ExpNode fields) {
+        public NewRecordNode(Location loc, Type type, ExpNode initFields) {
             super(loc, type);
-            this.fields = fields;
+            this.type = type;
+            this.initFields = initFields;
+            this.record = new HashMap<>();
+        }
+
+        /*
+         * Used during static checking to enter valid fields into node
+         */
+        public void enter(Type.Field field, ExpNode value) {
+            record.put(field.getId(), value);
         }
 
 
+        public ExpNode getFields() {
+            return initFields;
+        }
+
         @Override
         public Type getType() {
-            return super.getType();
+            return this.type;
         }
 
         @Override
         public void setType(Type type) {
-            super.setType(type);
+            this.type = type;
         }
 
         @Override
@@ -532,7 +548,7 @@ public abstract class ExpNode {
 
         @Override
         public ExpNode transform(ExpTransform<ExpNode> visitor) {
-            return null;
+            return visitor.visitNewRecordNode(this);
         }
 
         @Override
@@ -569,7 +585,7 @@ public abstract class ExpNode {
 
         @Override
         public ExpNode transform(ExpTransform<ExpNode> visitor) {
-            return null;
+            return visitor.visitNewPointerNode(this);
         }
 
         @Override
@@ -595,6 +611,14 @@ public abstract class ExpNode {
             this.value = value;
         }
 
+        public ExpNode getValue() {
+            return value;
+        }
+
+        public String getId() {
+            return id;
+        }
+
         @Override
         public Type getType() {
             return super.getType();
@@ -612,7 +636,7 @@ public abstract class ExpNode {
 
         @Override
         public ExpNode transform(ExpTransform<ExpNode> visitor) {
-            return null;
+            return visitor.visitRecordFieldAccessNode(this);
         }
 
         @Override
@@ -632,7 +656,7 @@ public abstract class ExpNode {
             this.lval = lval;
         }
 
-        public PointerDereferenceNode(Location loc, ExpNode value) {
+        public PointerDereferenceNode(Location loc, ExpNode lval) {
             super(loc);
             this.lval = lval;
         }
@@ -654,7 +678,7 @@ public abstract class ExpNode {
 
         @Override
         public ExpNode transform(ExpTransform<ExpNode> visitor) {
-            return null;
+            return visitor.visitPointerDereferenceNode(this);
         }
 
         @Override

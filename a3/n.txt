@@ -1,0 +1,738 @@
+/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/bin/java -ea "-javaagent:/Applications/IntelliJ IDEA CE.app/Contents/lib/idea_rt.jar=52756:/Applications/IntelliJ IDEA CE.app/Contents/bin" -Dfile.encoding=UTF-8 -classpath /Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/deploy.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/ext/cldrdata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/ext/dnsns.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/ext/jaccess.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/ext/jfxrt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/ext/localedata.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/ext/nashorn.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/ext/sunec.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/ext/sunjce_provider.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/ext/sunpkcs11.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/ext/zipfs.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/javaws.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/jfxswt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/management-agent.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/plugin.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/lib/ant-javafx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/lib/dt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/lib/javafx-mx.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/lib/jconsole.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/lib/packager.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/lib/sa-jdi.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_161.jdk/Contents/Home/lib/tools.jar:/Users/nicolekhor/Documents/2019/COMP4403/a3/out/production/a3:/Users/nicolekhor/Documents/2019/COMP4403/a3/java-cup-11b.jar:/Users/nicolekhor/Documents/2019/COMP4403/a3/jflex-full-1.7.0.jar:/Users/nicolekhor/.m2/repository/junit/junit/4.12/junit-4.12.jar:/Users/nicolekhor/.m2/repository/org/hamcrest/hamcrest-core/1.3/hamcrest-core-1.3.jar pl0.PL0_LALR -dvt /Users/nicolekhor/Documents/2019/COMP4403/a3/test-pgm/test-paramid-07.pl0
+Compiling test-paramid-07.pl0
+# Initializing parser
+# Current Symbol is #33
+# Reduce with prod #0 [NT=36, SZ=0]
+# Reduce rule: top state 0, lhs sym 36 -> state 3
+# Goto state #3
+# Reduce with prod #7 [NT=2, SZ=0]
+# Reduce rule: top state 3, lhs sym 2 -> state 5
+# Goto state #5
+# Shift under term #33 to state #8
+# Current token is Symbol: IDENTIFIER (unknown:1/4(-1) - unknown:1/4(-1))
+# Shift under term #37 to state #119
+# Current token is Symbol: COLON (unknown:1/6(-1) - unknown:1/6(-1))
+# Shift under term #3 to state #120
+# Current token is Symbol: IDENTIFIER (unknown:1/8(-1) - unknown:1/10(-1))
+# Shift under term #37 to state #105
+# Current token is Symbol: SEMICOLON (unknown:1/11(-1) - unknown:1/11(-1))
+# Reduce with prod #26 [NT=10, SZ=1]
+# Reduce rule: top state 120, lhs sym 10 -> state 121
+# Goto state #121
+# Shift under term #2 to state #122
+# Current token is Symbol: KW_PROCEDURE (unknown:3/0(-1) - unknown:3/8(-1))
+VarDecl: adding vars to scope level of 1
+# Reduce with prod #29 [NT=12, SZ=4]
+# Reduce rule: top state 8, lhs sym 12 -> state 118
+# Goto state #118
+# Reduce with prod #27 [NT=11, SZ=1]
+# Reduce rule: top state 8, lhs sym 11 -> state 116
+# Goto state #116
+# Reduce with prod #10 [NT=3, SZ=2]
+# Reduce rule: top state 5, lhs sym 3 -> state 10
+# Goto state #10
+# Reduce with prod #6 [NT=2, SZ=2]
+# Reduce rule: top state 3, lhs sym 2 -> state 5
+# Goto state #5
+# Shift under term #29 to state #6
+# Current token is Symbol: IDENTIFIER (unknown:3/10(-1) - unknown:3/10(-1))
+# Shift under term #37 to state #124
+# Current token is Symbol: LPAREN (unknown:3/11(-1) - unknown:3/11(-1))
+# Shift under term #18 to state #126
+# Current token is Symbol: IDENTIFIER (unknown:3/13(-1) - unknown:3/13(-1))
+# Shift under term #37 to state #130
+# Current token is Symbol: COLON (unknown:3/15(-1) - unknown:3/15(-1))
+# Shift under term #3 to state #140
+# Current token is Symbol: IDENTIFIER (unknown:3/17(-1) - unknown:3/19(-1))
+# Shift under term #37 to state #105
+# Current token is Symbol: GETS (unknown:3/21(-1) - unknown:3/22(-1))
+# Reduce with prod #26 [NT=10, SZ=1]
+# Reduce rule: top state 140, lhs sym 10 -> state 141
+# Goto state #141
+# Shift under term #5 to state #142
+# Current token is Symbol: MINUS (unknown:3/24(-1) - unknown:3/24(-1))
+# Shift under term #7 to state #40
+# Current token is Symbol: NUMBER (unknown:3/25(-1) - unknown:3/25(-1))
+# Reduce with prod #86 [NT=30, SZ=1]
+# Reduce rule: top state 142, lhs sym 30 -> state 49
+# Goto state #49
+# Shift under term #38 to state #42
+# Current token is Symbol: RPAREN (unknown:3/27(-1) - unknown:3/27(-1))
+# Reduce with prod #84 [NT=26, SZ=1]
+# Reduce rule: top state 49, lhs sym 26 -> state 54
+# Goto state #54
+# Reduce with prod #82 [NT=26, SZ=2]
+# Reduce rule: top state 142, lhs sym 26 -> state 48
+# Goto state #48
+# Reduce with prod #77 [NT=25, SZ=1]
+# Reduce rule: top state 142, lhs sym 25 -> state 46
+# Goto state #46
+# Reduce with prod #73 [NT=24, SZ=1]
+# Reduce rule: top state 142, lhs sym 24 -> state 43
+# Goto state #43
+# Reduce with prod #65 [NT=23, SZ=1]
+# Reduce rule: top state 142, lhs sym 23 -> state 41
+# Goto state #41
+# Reduce with prod #64 [NT=22, SZ=1]
+# Reduce rule: top state 142, lhs sym 22 -> state 144
+# Goto state #144
+# Reduce with prod #44 [NT=35, SZ=2]
+# Reduce rule: top state 141, lhs sym 35 -> state 143
+# Goto state #143
+# Reduce with prod #40 [NT=32, SZ=4]
+# Reduce rule: top state 126, lhs sym 32 -> state 127
+# Goto state #127
+# Reduce with prod #36 [NT=15, SZ=1]
+# Reduce rule: top state 126, lhs sym 15 -> state 129
+# Goto state #129
+# Reduce with prod #34 [NT=16, SZ=1]
+# Reduce rule: top state 126, lhs sym 16 -> state 131
+# Goto state #131
+# Shift under term #19 to state #139
+# Current token is Symbol: EQUALS (unknown:3/29(-1) - unknown:3/29(-1))
+Adding formal params to scope level 2
+# Reduce with prod #32 [NT=14, SZ=5]
+# Reduce rule: top state 5, lhs sym 14 -> state 11
+# Goto state #11
+# Shift under term #10 to state #113
+# Current token is Symbol: KW_PROCEDURE (unknown:5/2(-1) - unknown:5/10(-1))
+# Reduce with prod #7 [NT=2, SZ=0]
+# Reduce rule: top state 113, lhs sym 2 -> state 5
+# Goto state #5
+# Shift under term #29 to state #6
+# Current token is Symbol: IDENTIFIER (unknown:5/12(-1) - unknown:5/12(-1))
+# Shift under term #37 to state #124
+# Current token is Symbol: LPAREN (unknown:5/13(-1) - unknown:5/13(-1))
+# Shift under term #18 to state #126
+# Current token is Symbol: IDENTIFIER (unknown:5/15(-1) - unknown:5/15(-1))
+# Shift under term #37 to state #130
+# Current token is Symbol: COLON (unknown:5/17(-1) - unknown:5/17(-1))
+# Shift under term #3 to state #140
+# Current token is Symbol: IDENTIFIER (unknown:5/19(-1) - unknown:5/21(-1))
+# Shift under term #37 to state #105
+# Current token is Symbol: GETS (unknown:5/23(-1) - unknown:5/24(-1))
+# Reduce with prod #26 [NT=10, SZ=1]
+# Reduce rule: top state 140, lhs sym 10 -> state 141
+# Goto state #141
+# Shift under term #5 to state #142
+# Current token is Symbol: IDENTIFIER (unknown:5/26(-1) - unknown:5/26(-1))
+# Shift under term #37 to state #36
+# Current token is Symbol: PLUS (unknown:5/27(-1) - unknown:5/27(-1))
+# Reduce with prod #62 [NT=31, SZ=1]
+# Reduce rule: top state 142, lhs sym 31 -> state 51
+# Goto state #51
+# Reduce with prod #85 [NT=26, SZ=1]
+# Reduce rule: top state 142, lhs sym 26 -> state 48
+# Goto state #48
+# Reduce with prod #77 [NT=25, SZ=1]
+# Reduce rule: top state 142, lhs sym 25 -> state 46
+# Goto state #46
+# Reduce with prod #73 [NT=24, SZ=1]
+# Reduce rule: top state 142, lhs sym 24 -> state 43
+# Goto state #43
+# Shift under term #6 to state #64
+# Current token is Symbol: IDENTIFIER (unknown:5/28(-1) - unknown:5/28(-1))
+# Reduce with prod #75 [NT=28, SZ=1]
+# Reduce rule: top state 43, lhs sym 28 -> state 66
+# Goto state #66
+# Shift under term #37 to state #36
+# Current token is Symbol: RPAREN (unknown:5/30(-1) - unknown:5/30(-1))
+# Reduce with prod #62 [NT=31, SZ=1]
+# Reduce rule: top state 66, lhs sym 31 -> state 51
+# Goto state #51
+# Reduce with prod #85 [NT=26, SZ=1]
+# Reduce rule: top state 66, lhs sym 26 -> state 48
+# Goto state #48
+# Reduce with prod #77 [NT=25, SZ=1]
+# Reduce rule: top state 66, lhs sym 25 -> state 71
+# Goto state #71
+# Reduce with prod #74 [NT=24, SZ=3]
+# Reduce rule: top state 142, lhs sym 24 -> state 43
+# Goto state #43
+# Reduce with prod #65 [NT=23, SZ=1]
+# Reduce rule: top state 142, lhs sym 23 -> state 41
+# Goto state #41
+# Reduce with prod #64 [NT=22, SZ=1]
+# Reduce rule: top state 142, lhs sym 22 -> state 144
+# Goto state #144
+# Reduce with prod #44 [NT=35, SZ=2]
+# Reduce rule: top state 141, lhs sym 35 -> state 143
+# Goto state #143
+# Reduce with prod #40 [NT=32, SZ=4]
+# Reduce rule: top state 126, lhs sym 32 -> state 127
+# Goto state #127
+# Reduce with prod #36 [NT=15, SZ=1]
+# Reduce rule: top state 126, lhs sym 15 -> state 129
+# Goto state #129
+# Reduce with prod #34 [NT=16, SZ=1]
+# Reduce rule: top state 126, lhs sym 16 -> state 131
+# Goto state #131
+# Shift under term #19 to state #139
+# Current token is Symbol: EQUALS (unknown:5/32(-1) - unknown:5/32(-1))
+Adding formal params to scope level 3
+# Reduce with prod #32 [NT=14, SZ=5]
+# Reduce rule: top state 5, lhs sym 14 -> state 11
+# Goto state #11
+# Shift under term #10 to state #113
+# Current token is Symbol: KW_BEGIN (unknown:6/4(-1) - unknown:6/8(-1))
+# Reduce with prod #7 [NT=2, SZ=0]
+# Reduce rule: top state 113, lhs sym 2 -> state 5
+# Goto state #5
+# Shift under term #22 to state #13
+# Current token is Symbol: KW_WRITE (unknown:7/6(-1) - unknown:7/10(-1))
+# Shift under term #35 to state #34
+# Current token is Symbol: IDENTIFIER (unknown:7/12(-1) - unknown:7/12(-1))
+# Shift under term #37 to state #36
+# Current token is Symbol: SEMICOLON (unknown:7/13(-1) - unknown:7/13(-1))
+# Reduce with prod #62 [NT=31, SZ=1]
+# Reduce rule: top state 34, lhs sym 31 -> state 51
+# Goto state #51
+# Reduce with prod #85 [NT=26, SZ=1]
+# Reduce rule: top state 34, lhs sym 26 -> state 48
+# Goto state #48
+# Reduce with prod #77 [NT=25, SZ=1]
+# Reduce rule: top state 34, lhs sym 25 -> state 46
+# Goto state #46
+# Reduce with prod #73 [NT=24, SZ=1]
+# Reduce rule: top state 34, lhs sym 24 -> state 77
+# Goto state #77
+# Reduce with prod #52 [NT=20, SZ=2]
+# Reduce rule: top state 13, lhs sym 20 -> state 33
+# Goto state #33
+# Reduce with prod #46 [NT=19, SZ=1]
+# Reduce rule: top state 13, lhs sym 19 -> state 31
+# Goto state #31
+# Shift under term #2 to state #79
+# Current token is Symbol: IDENTIFIER (unknown:8/6(-1) - unknown:8/6(-1))
+# Shift under term #37 to state #36
+# Current token is Symbol: ASSIGN (unknown:8/8(-1) - unknown:8/9(-1))
+# Reduce with prod #62 [NT=31, SZ=1]
+# Reduce rule: top state 79, lhs sym 31 -> state 38
+# Goto state #38
+# Shift under term #4 to state #39
+# Current token is Symbol: IDENTIFIER (unknown:8/11(-1) - unknown:8/11(-1))
+# Shift under term #37 to state #36
+# Current token is Symbol: MINUS (unknown:8/12(-1) - unknown:8/12(-1))
+# Reduce with prod #62 [NT=31, SZ=1]
+# Reduce rule: top state 39, lhs sym 31 -> state 51
+# Goto state #51
+# Reduce with prod #85 [NT=26, SZ=1]
+# Reduce rule: top state 39, lhs sym 26 -> state 48
+# Goto state #48
+# Reduce with prod #77 [NT=25, SZ=1]
+# Reduce rule: top state 39, lhs sym 25 -> state 46
+# Goto state #46
+# Reduce with prod #73 [NT=24, SZ=1]
+# Reduce rule: top state 39, lhs sym 24 -> state 43
+# Goto state #43
+# Shift under term #7 to state #60
+# Current token is Symbol: NUMBER (unknown:8/13(-1) - unknown:8/13(-1))
+# Reduce with prod #76 [NT=28, SZ=1]
+# Reduce rule: top state 43, lhs sym 28 -> state 66
+# Goto state #66
+# Shift under term #38 to state #42
+# Current token is Symbol: SEMICOLON (unknown:8/14(-1) - unknown:8/14(-1))
+# Reduce with prod #84 [NT=26, SZ=1]
+# Reduce rule: top state 66, lhs sym 26 -> state 48
+# Goto state #48
+# Reduce with prod #77 [NT=25, SZ=1]
+# Reduce rule: top state 66, lhs sym 25 -> state 71
+# Goto state #71
+# Reduce with prod #74 [NT=24, SZ=3]
+# Reduce rule: top state 39, lhs sym 24 -> state 43
+# Goto state #43
+# Reduce with prod #65 [NT=23, SZ=1]
+# Reduce rule: top state 39, lhs sym 23 -> state 41
+# Goto state #41
+# Reduce with prod #64 [NT=22, SZ=1]
+# Reduce rule: top state 39, lhs sym 22 -> state 44
+# Goto state #44
+# Reduce with prod #53 [NT=20, SZ=3]
+# Reduce rule: top state 79, lhs sym 20 -> state 81
+# Goto state #81
+# Reduce with prod #47 [NT=19, SZ=3]
+# Reduce rule: top state 13, lhs sym 19 -> state 31
+# Goto state #31
+# Shift under term #2 to state #79
+# Current token is Symbol: KW_IF (unknown:9/6(-1) - unknown:9/7(-1))
+# Shift under term #28 to state #37
+# Current token is Symbol: IDENTIFIER (unknown:9/9(-1) - unknown:9/9(-1))
+# Shift under term #37 to state #36
+# Current token is Symbol: EQUALS (unknown:9/11(-1) - unknown:9/11(-1))
+# Reduce with prod #62 [NT=31, SZ=1]
+# Reduce rule: top state 37, lhs sym 31 -> state 51
+# Goto state #51
+# Reduce with prod #85 [NT=26, SZ=1]
+# Reduce rule: top state 37, lhs sym 26 -> state 48
+# Goto state #48
+# Reduce with prod #77 [NT=25, SZ=1]
+# Reduce rule: top state 37, lhs sym 25 -> state 46
+# Goto state #46
+# Reduce with prod #73 [NT=24, SZ=1]
+# Reduce rule: top state 37, lhs sym 24 -> state 43
+# Goto state #43
+# Shift under term #10 to state #69
+# Current token is Symbol: NUMBER (unknown:9/13(-1) - unknown:9/15(-1))
+# Reduce with prod #67 [NT=27, SZ=1]
+# Reduce rule: top state 43, lhs sym 27 -> state 68
+# Goto state #68
+# Shift under term #38 to state #42
+# Current token is Symbol: KW_THEN (unknown:9/17(-1) - unknown:9/20(-1))
+# Reduce with prod #84 [NT=26, SZ=1]
+# Reduce rule: top state 68, lhs sym 26 -> state 48
+# Goto state #48
+# Reduce with prod #77 [NT=25, SZ=1]
+# Reduce rule: top state 68, lhs sym 25 -> state 46
+# Goto state #46
+# Reduce with prod #73 [NT=24, SZ=1]
+# Reduce rule: top state 68, lhs sym 24 -> state 70
+# Goto state #70
+# Reduce with prod #66 [NT=23, SZ=3]
+# Reduce rule: top state 37, lhs sym 23 -> state 41
+# Goto state #41
+# Reduce with prod #64 [NT=22, SZ=1]
+# Reduce rule: top state 37, lhs sym 22 -> state 72
+# Goto state #72
+# Shift under term #31 to state #73
+# Current token is Symbol: KW_WRITE (unknown:10/8(-1) - unknown:10/12(-1))
+# Shift under term #35 to state #34
+# Current token is Symbol: IDENTIFIER (unknown:10/14(-1) - unknown:10/14(-1))
+# Shift under term #37 to state #36
+# Current token is Symbol: MINUS (unknown:10/15(-1) - unknown:10/15(-1))
+# Reduce with prod #62 [NT=31, SZ=1]
+# Reduce rule: top state 34, lhs sym 31 -> state 51
+# Goto state #51
+# Reduce with prod #85 [NT=26, SZ=1]
+# Reduce rule: top state 34, lhs sym 26 -> state 48
+# Goto state #48
+# Reduce with prod #77 [NT=25, SZ=1]
+# Reduce rule: top state 34, lhs sym 25 -> state 46
+# Goto state #46
+# Reduce with prod #73 [NT=24, SZ=1]
+# Reduce rule: top state 34, lhs sym 24 -> state 77
+# Goto state #77
+# Shift under term #7 to state #60
+# Current token is Symbol: NUMBER (unknown:10/16(-1) - unknown:10/16(-1))
+# Reduce with prod #76 [NT=28, SZ=1]
+# Reduce rule: top state 77, lhs sym 28 -> state 66
+# Goto state #66
+# Shift under term #38 to state #42
+# Current token is Symbol: KW_ELSE (unknown:11/6(-1) - unknown:11/9(-1))
+# Reduce with prod #84 [NT=26, SZ=1]
+# Reduce rule: top state 66, lhs sym 26 -> state 48
+# Goto state #48
+# Reduce with prod #77 [NT=25, SZ=1]
+# Reduce rule: top state 66, lhs sym 25 -> state 71
+# Goto state #71
+# Reduce with prod #74 [NT=24, SZ=3]
+# Reduce rule: top state 34, lhs sym 24 -> state 77
+# Goto state #77
+# Reduce with prod #52 [NT=20, SZ=2]
+# Reduce rule: top state 73, lhs sym 20 -> state 74
+# Goto state #74
+# Shift under term #26 to state #75
+# Current token is Symbol: KW_CALL (unknown:12/8(-1) - unknown:12/11(-1))
+# Shift under term #23 to state #30
+# Current token is Symbol: IDENTIFIER (unknown:12/13(-1) - unknown:12/13(-1))
+# Shift under term #37 to state #82
+# Current token is Symbol: LPAREN (unknown:12/14(-1) - unknown:12/14(-1))
+# Shift under term #18 to state #83
+# Current token is Symbol: RPAREN (unknown:12/15(-1) - unknown:12/15(-1))
+# Reduce with prod #57 [NT=18, SZ=0]
+# Reduce rule: top state 83, lhs sym 18 -> state 84
+# Goto state #84
+# Shift under term #19 to state #93
+# Current token is Symbol: KW_END (unknown:13/4(-1) - unknown:13/6(-1))
+# Reduce with prod #54 [NT=20, SZ=5]
+# Reduce rule: top state 75, lhs sym 20 -> state 76
+# Goto state #76
+# Reduce with prod #49 [NT=20, SZ=6]
+# Reduce rule: top state 79, lhs sym 20 -> state 81
+# Goto state #81
+# Reduce with prod #47 [NT=19, SZ=3]
+# Reduce rule: top state 13, lhs sym 19 -> state 31
+# Goto state #31
+# Shift under term #27 to state #80
+# Current token is Symbol: SEMICOLON (unknown:13/7(-1) - unknown:13/7(-1))
+# Reduce with prod #45 [NT=21, SZ=3]
+# Reduce rule: top state 5, lhs sym 21 -> state 7
+# Goto state #7
+# Reduce with prod #4 [NT=1, SZ=2]
+# Reduce rule: top state 113, lhs sym 1 -> state 114
+# Goto state #114
+# Shift under term #2 to state #115
+# Current token is Symbol: KW_BEGIN (unknown:15/2(-1) - unknown:15/6(-1))
+# Reduce with prod #31 [NT=13, SZ=4]
+# Reduce rule: top state 5, lhs sym 13 -> state 9
+# Goto state #9
+# Reduce with prod #5 [NT=2, SZ=2]
+# Reduce rule: top state 113, lhs sym 2 -> state 5
+# Goto state #5
+# Shift under term #22 to state #13
+# Current token is Symbol: KW_CALL (unknown:16/4(-1) - unknown:16/7(-1))
+# Shift under term #23 to state #30
+# Current token is Symbol: IDENTIFIER (unknown:16/9(-1) - unknown:16/9(-1))
+# Shift under term #37 to state #82
+# Current token is Symbol: LPAREN (unknown:16/10(-1) - unknown:16/10(-1))
+# Shift under term #18 to state #83
+# Current token is Symbol: RPAREN (unknown:16/11(-1) - unknown:16/11(-1))
+# Reduce with prod #57 [NT=18, SZ=0]
+# Reduce rule: top state 83, lhs sym 18 -> state 84
+# Goto state #84
+# Shift under term #19 to state #93
+# Current token is Symbol: KW_END (unknown:17/2(-1) - unknown:17/4(-1))
+# Reduce with prod #54 [NT=20, SZ=5]
+# Reduce rule: top state 13, lhs sym 20 -> state 33
+# Goto state #33
+# Reduce with prod #46 [NT=19, SZ=1]
+# Reduce rule: top state 13, lhs sym 19 -> state 31
+# Goto state #31
+# Shift under term #27 to state #80
+# Current token is Symbol: SEMICOLON (unknown:17/5(-1) - unknown:17/5(-1))
+# Reduce with prod #45 [NT=21, SZ=3]
+# Reduce rule: top state 5, lhs sym 21 -> state 7
+# Goto state #7
+# Reduce with prod #4 [NT=1, SZ=2]
+# Reduce rule: top state 113, lhs sym 1 -> state 114
+# Goto state #114
+# Shift under term #2 to state #115
+# Current token is Symbol: KW_BEGIN (unknown:19/0(-1) - unknown:19/4(-1))
+# Reduce with prod #31 [NT=13, SZ=4]
+# Reduce rule: top state 5, lhs sym 13 -> state 9
+# Goto state #9
+# Reduce with prod #5 [NT=2, SZ=2]
+# Reduce rule: top state 3, lhs sym 2 -> state 5
+# Goto state #5
+# Shift under term #22 to state #13
+# Current token is Symbol: IDENTIFIER (unknown:20/2(-1) - unknown:20/2(-1))
+# Shift under term #37 to state #36
+# Current token is Symbol: ASSIGN (unknown:20/4(-1) - unknown:20/5(-1))
+# Reduce with prod #62 [NT=31, SZ=1]
+# Reduce rule: top state 13, lhs sym 31 -> state 38
+# Goto state #38
+# Shift under term #4 to state #39
+# Current token is Symbol: NUMBER (unknown:20/7(-1) - unknown:20/9(-1))
+# Shift under term #38 to state #42
+# Current token is Symbol: SEMICOLON (unknown:20/10(-1) - unknown:20/10(-1))
+# Reduce with prod #84 [NT=26, SZ=1]
+# Reduce rule: top state 39, lhs sym 26 -> state 48
+# Goto state #48
+# Reduce with prod #77 [NT=25, SZ=1]
+# Reduce rule: top state 39, lhs sym 25 -> state 46
+# Goto state #46
+# Reduce with prod #73 [NT=24, SZ=1]
+# Reduce rule: top state 39, lhs sym 24 -> state 43
+# Goto state #43
+# Reduce with prod #65 [NT=23, SZ=1]
+# Reduce rule: top state 39, lhs sym 23 -> state 41
+# Goto state #41
+# Reduce with prod #64 [NT=22, SZ=1]
+# Reduce rule: top state 39, lhs sym 22 -> state 44
+# Goto state #44
+# Reduce with prod #53 [NT=20, SZ=3]
+# Reduce rule: top state 13, lhs sym 20 -> state 33
+# Goto state #33
+# Reduce with prod #46 [NT=19, SZ=1]
+# Reduce rule: top state 13, lhs sym 19 -> state 31
+# Goto state #31
+# Shift under term #2 to state #79
+# Current token is Symbol: KW_CALL (unknown:21/2(-1) - unknown:21/5(-1))
+# Shift under term #23 to state #30
+# Current token is Symbol: IDENTIFIER (unknown:21/7(-1) - unknown:21/7(-1))
+# Shift under term #37 to state #82
+# Current token is Symbol: LPAREN (unknown:21/8(-1) - unknown:21/8(-1))
+# Shift under term #18 to state #83
+# Current token is Symbol: RPAREN (unknown:21/9(-1) - unknown:21/9(-1))
+# Reduce with prod #57 [NT=18, SZ=0]
+# Reduce rule: top state 83, lhs sym 18 -> state 84
+# Goto state #84
+# Shift under term #19 to state #93
+# Current token is Symbol: KW_END (unknown:22/0(-1) - unknown:22/2(-1))
+# Reduce with prod #54 [NT=20, SZ=5]
+# Reduce rule: top state 79, lhs sym 20 -> state 81
+# Goto state #81
+# Reduce with prod #47 [NT=19, SZ=3]
+# Reduce rule: top state 13, lhs sym 19 -> state 31
+# Goto state #31
+# Shift under term #27 to state #80
+# Current token is Symbol: EOF (unknown:23/0(-1) - unknown:23/-1(-1))
+# Reduce with prod #45 [NT=21, SZ=3]
+# Reduce rule: top state 5, lhs sym 21 -> state 7
+# Goto state #7
+# Reduce with prod #4 [NT=1, SZ=2]
+# Reduce rule: top state 3, lhs sym 1 -> state 4
+# Goto state #4
+# Reduce with prod #1 [NT=0, SZ=2]
+# Reduce rule: top state 0, lhs sym 0 -> state 1
+# Goto state #1
+# Shift under term #0 to state #147
+# Current token is Symbol: EOF (unknown:23/0(-1) - unknown:23/-1(-1))
+# Reduce with prod #2 [NT=0, SZ=2]
+# Reduce rule: top state 0, lhs sym 0 -> state 1
+# Goto state #1
+Parsing complete
+Begin checking of Program
+ Begin checking of Procedure
+In Procedure Node
+Scope of procedure body is 1
+Scope formal param check is 0
+[PROC   p : PROCEDURE(VALUE PARAM  n : ref(int) level 2 offset 0) level 1, VAR    x : ref(int) level 1 offset 3]
+  Begin checking of Block
+   Begin checking of DeclList
+    Begin checking of Procedure
+In Procedure Node
+Scope of procedure body is 2
+     Begin checking of Unary
+      Begin checking of Const
+      End checking of Const
+      Coercing 1:int to int
+       Succeeded
+     End checking of Unary
+Scope formal param check is 1
+class tree.ExpNode$UnaryNode
+attempting to coerce non-ref param int to int
+     Coercing NEG_OP(1):int to int
+      Succeeded
+[VALUE PARAM  n : ref(int) level 2 offset 0, PROC   q : PROCEDURE(VALUE PARAM  n : ref(int) level 3 offset 0) level 2]
+     Begin checking of Block
+      Begin checking of DeclList
+       Begin checking of Procedure
+In Procedure Node
+Scope of procedure body is 3
+        Begin checking of Binary
+         Begin checking of Identifier
+          Transformed n to Variable
+         End checking of Identifier
+         Begin checking of Identifier
+          Transformed x to Variable
+         End checking of Identifier
+         Coercing n:ref(int) to int
+          Coerce dereference ref(int)
+          Succeeded
+         Coercing x:ref(int) to int
+          Coerce dereference ref(int)
+          Succeeded
+        End checking of Binary
+Scope formal param check is 2
+class tree.ExpNode$BinaryNode
+attempting to coerce non-ref param int to int
+        Coercing (Dereference(n)ADD_OPDereference(x)):int to int
+         Succeeded
+[VALUE PARAM  n : ref(int) level 3 offset 0]
+        Begin checking of Block
+         Begin checking of DeclList
+         End checking of DeclList
+         Begin checking of StatementList
+          Begin checking of Write
+           Begin checking of Identifier
+            Transformed n to Variable
+           End checking of Identifier
+           Coercing n:ref(int) to int
+            Coerce dereference ref(int)
+            Succeeded
+          End checking of Write
+          Begin checking of Assignment
+           Begin checking of Identifier
+            Transformed x to Variable
+           End checking of Identifier
+           Begin checking of Binary
+            Begin checking of Identifier
+             Transformed x to Variable
+            End checking of Identifier
+            Begin checking of Const
+            End checking of Const
+            Coercing x:ref(int) to int
+             Coerce dereference ref(int)
+             Succeeded
+            Coercing 1:int to int
+             Succeeded
+           End checking of Binary
+           Coercing (Dereference(x)SUB_OP1):int to int
+            Succeeded
+          End checking of Assignment
+          Begin checking of If
+           Begin checking of Binary
+            Begin checking of Identifier
+             Transformed n to Variable
+            End checking of Identifier
+            Begin checking of Const
+            End checking of Const
+            Coercing n and 101 to (((boolean*boolean)->boolean) & ((int*int)->boolean))
+             Coercing n:ref(int) to boolean
+              Coerce dereference ref(int)
+              Failed to coerce Dereference(n) to boolean
+             Coercing n:ref(int) to int
+              Coerce dereference ref(int)
+              Succeeded
+             Coercing 101:int to int
+              Succeeded
+           End checking of Binary
+           Coercing (Dereference(n)EQUALS_OP101):boolean to boolean
+            Succeeded
+           Begin checking of Write
+            Begin checking of Binary
+             Begin checking of Identifier
+              Transformed n to Variable
+             End checking of Identifier
+             Begin checking of Const
+             End checking of Const
+             Coercing n:ref(int) to int
+              Coerce dereference ref(int)
+              Succeeded
+             Coercing 1:int to int
+              Succeeded
+            End checking of Binary
+            Coercing (Dereference(n)SUB_OP1):int to int
+             Succeeded
+           End checking of Write
+           Begin checking of Call
+In Call Node
+Scope formal param check is 3
+           End checking of Call
+          End checking of If
+         End checking of StatementList
+        End checking of Block
+       End checking of Procedure
+      End checking of DeclList
+      Begin checking of StatementList
+       Begin checking of Call
+In Call Node
+Scope formal param check is 2
+       End checking of Call
+      End checking of StatementList
+     End checking of Block
+    End checking of Procedure
+   End checking of DeclList
+   Begin checking of StatementList
+    Begin checking of Assignment
+     Begin checking of Identifier
+      Transformed x to Variable
+     End checking of Identifier
+     Begin checking of Const
+     End checking of Const
+     Coercing 104:int to int
+      Succeeded
+    End checking of Assignment
+    Begin checking of Call
+In Call Node
+Scope formal param check is 1
+    End checking of Call
+   End checking of StatementList
+  End checking of Block
+ End checking of Procedure
+End checking of Program
+Static semantic analysis complete
+Begin generating of Program
+ Begin generating of Procedure
+  Begin generating of Block
+   Begin generating of StatementList
+    Begin generating of Assignment
+     Begin generating of Const
+     End generating of Const
+     Begin generating of Variable
+     End generating of Variable
+    End generating of Assignment
+    Begin generating of Call
+     Begin generating of Unary
+      Begin generating of Const
+      End generating of Const
+     End generating of Unary
+    End generating of Call
+   End generating of StatementList
+   Begin generating of DeclList
+    Begin generating of Procedure
+     Begin generating of Block
+      Begin generating of StatementList
+       Begin generating of Call
+        Begin generating of Binary
+         Begin generating of ArgsInOrder
+          Begin generating of Dereference
+           Begin generating of Variable
+           End generating of Variable
+          End generating of Dereference
+          Begin generating of Dereference
+           Begin generating of Variable
+           End generating of Variable
+          End generating of Dereference
+         End generating of ArgsInOrder
+        End generating of Binary
+       End generating of Call
+      End generating of StatementList
+      Begin generating of DeclList
+       Begin generating of Procedure
+        Begin generating of Block
+         Begin generating of StatementList
+          Begin generating of Write
+           Begin generating of Dereference
+            Begin generating of Variable
+            End generating of Variable
+           End generating of Dereference
+          End generating of Write
+          Begin generating of Assignment
+           Begin generating of Binary
+            Begin generating of ArgsInOrder
+             Begin generating of Dereference
+              Begin generating of Variable
+              End generating of Variable
+             End generating of Dereference
+             Begin generating of Const
+             End generating of Const
+            End generating of ArgsInOrder
+           End generating of Binary
+           Begin generating of Variable
+           End generating of Variable
+          End generating of Assignment
+          Begin generating of If
+           Begin generating of Binary
+            Begin generating of ArgsInOrder
+             Begin generating of Dereference
+              Begin generating of Variable
+              End generating of Variable
+             End generating of Dereference
+             Begin generating of Const
+             End generating of Const
+            End generating of ArgsInOrder
+           End generating of Binary
+           Begin generating of Write
+            Begin generating of Binary
+             Begin generating of ArgsInOrder
+              Begin generating of Dereference
+               Begin generating of Variable
+               End generating of Variable
+              End generating of Dereference
+              Begin generating of Const
+              End generating of Const
+             End generating of ArgsInOrder
+            End generating of Binary
+           End generating of Write
+           Begin generating of Call
+            Begin generating of Unary
+             Begin generating of Const
+             End generating of Const
+            End generating of Unary
+           End generating of Call
+          End generating of If
+         End generating of StatementList
+         Begin generating of DeclList
+         End generating of DeclList
+        End generating of Block
+       End generating of Procedure
+      End generating of DeclList
+     End generating of Block
+    End generating of Procedure
+   End generating of DeclList
+  End generating of Block
+ End generating of Procedure
+End generating of Program
+Code generation complete
+Running ...
+104
+103
+102
+101
+100
+
+Terminated
+No errors detected.
+
+Process finished with exit code 0

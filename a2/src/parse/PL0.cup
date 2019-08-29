@@ -356,7 +356,15 @@ Fields ::= Field:field
     |   Fields:fields SEMICOLON Field:field
         {:
             // Fields would already be declared as type RecordType
-            fields.add(field);
+
+            // Valid type identifiers checked in Type.java
+            // Recursive definitions checked in Type.java
+            // Need to check that the names of the fields are distinct
+            if (fields.containsField(field.getId())) {
+                errors.error(field.getId() + " already declared", fieldxleft);
+            } else {
+                fields.add(field);
+            }
             RESULT = fields;
         :}
      ;

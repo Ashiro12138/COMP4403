@@ -3,7 +3,8 @@ var x : int;
 
 procedure p( n : int <- -1 ) =
 
-  procedure q( n : int <- n+x ) =
+  procedure q( n : int <- n+x ) = // check n+x type at type checking time and ovverride it later
+  //when gen code - look up actual sym tab when calling to replace value
     begin
       write n;       // writes 103, 102, 101
       x := x-1;

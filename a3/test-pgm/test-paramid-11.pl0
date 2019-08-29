@@ -7,6 +7,7 @@ procedure setn( i : int ) =
   begin
     n := i
   end; // setn
+
 procedure p( n : int <- n-1 ) =   // default uses global n; param = 106, 103, 100
 
   procedure q( n : int <- n-1 ) = // default uses parameter to p; param = 105, 102
@@ -24,6 +25,7 @@ procedure p( n : int <- n-1 ) =   // default uses global n; param = 106, 103, 10
     else
        n := n // no-op
   end; // p
+
 begin
   n := 107;
   call p()

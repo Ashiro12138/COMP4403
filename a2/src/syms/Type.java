@@ -481,8 +481,7 @@ public abstract class Type {
              * to this type. If the coercion to the base type fails it will
              * generate an exception, which is allowed to pass up to the caller.
              */
-            ExpNode coerceExp = baseType.coerceToType(exp);
-            /* If we get here, coerceExp is of the same type as the base
+            ExpNode coerceExp = baseType.coerceToType(exp);/* If we get here, coerceExp is of the same type as the base
              * type of this subrange type. We just need to narrow it
              * down to this subrange.
              */

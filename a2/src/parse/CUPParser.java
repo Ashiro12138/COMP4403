@@ -799,7 +799,15 @@ class CUP$CUPParser$actions {
 		Type.Field field = (Type.Field)((java_cup.runtime.Symbol) CUP$CUPParser$stack.peek()).value;
 		
             // Fields would already be declared as type RecordType
-            fields.add(field);
+
+            // Valid type identifiers checked in Type.java
+            // Recursive definitions checked in Type.java
+            // Need to check that the names of the fields are distinct
+            if (fields.containsField(field.getId())) {
+                errors.error(field.getId() + " already declared", fieldxleft);
+            } else {
+                fields.add(field);
+            }
             RESULT = fields;
         
               CUP$CUPParser$result = parser.getSymbolFactory().newSymbol("Fields",33, ((java_cup.runtime.Symbol)CUP$CUPParser$stack.elementAt(CUP$CUPParser$top-2)), ((java_cup.runtime.Symbol)CUP$CUPParser$stack.peek()), RESULT);

@@ -1,7 +1,7 @@
 package tree;
 
 import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -472,6 +472,112 @@ public class StaticChecker implements DeclVisitor, StatementVisitor,
         endCheck("WidenSubrange");
         return node;
     }
+
+    public ExpNode visitExpListNode(ExpNode.ExpListNode node) {
+        beginCheck("ExpList");
+        // Determine type using transform
+        ArrayList<ExpNode> list = node.getExpList();
+        for (ExpNode exp: list) {
+            exp.transform(this); // Should turn into VariableNode or ConstNode
+        }
+
+        endCheck("ExpList");
+        return node;
+    }
+
+    /**
+     * Check for record constructor
+     * */
+    public ExpNode visitNewRecordNode(ExpNode.NewRecordNode node) {
+        beginCheck("NewRecord");
+
+        // Check type is a record type if doesn't work then try syms lookup
+        Type testType = node.getType().resolveType();
+        if (!(testType instanceof Type.RecordType)) {
+            // If error, already reported - NOT WORKING
+            if (testType.equals(Type.ERROR_TYPE)) {
+                node.setType(Type.ERROR_TYPE);
+                return node;
+            }
+            staticError("Record constructor expected record type", node.getLocation());
+        }
+
+        Type.RecordType recordType = (Type.RecordType) testType;
+        node.setType(recordType);
+        // Verify given expressions are an ExpListNode
+        ExpNode valuesAsANode = node.getFields().transform(this);
+        if (!(valuesAsANode instanceof ExpNode.ExpListNode)) {
+            staticError("Record constructor expected list of values",
+                    node.getFields().getLocation());
+        }
+
+        ExpNode.ExpListNode expListNode = (ExpNode.ExpListNode) valuesAsANode;
+        ArrayList<ExpNode>  expList = expListNode.getExpList();
+
+        /* Check each expression's type is compatible with corresponding field's type in record's
+         * field type definitions  */
+
+        List<Type.Field> fieldList = recordType.getFieldList(); //Type.java resolves field types
+
+        // Check constructor expressions and field definitions is 1-1
+        if (expList.size() != fieldList.size()) {
+            staticError("Record constructor received wrong number of field expressions",
+                    node.getFields().getLocation());
+        }
+
+        /* Expressions in type constructor must match the fields of the record in order of
+         * declaration & be assignment compatible with field */
+        for (int i = 0; i < expList.size(); i++) {
+            ExpNode expression = expList.get(i).transform(this);
+            // Check expression type is ConstNode or VariableNode? if (!(expression instanceof
+            Type typeOfExpression = expression.getType();
+            Type.Field fieldEntry = fieldList.get(i);
+
+            if (!typeOfExpression.equals(fieldEntry.getType())) {
+                if (fieldEntry.getType().equals(Type.ERROR_TYPE)) {
+                    // Was already invalid so just return an error node?
+                }
+                staticError("Field in record constructor expected type " + fieldEntry.getType()
+                        + "but found type " + typeOfExpression, expression.getLocation());
+                break;
+            } else {
+                node.enter(fieldEntry, expression);
+            }
+        }
+
+        // Make subclass
+        endCheck("NewRecord");
+        return node;
+    }
+
+    public ExpNode visitNewPointerNode(ExpNode.NewPointerNode node) {
+        beginCheck("NewPointer");
+
+        endCheck("NewPointer");
+        return node;
+    }
+
+    public ExpNode visitRecordFieldAccessNode(ExpNode.RecordFieldAccessNode node) {
+        beginCheck("RecordFieldAccess");
+        // Reference to a field of a record "lval.id"
+        // r must be a record
+        ExpNode lval = node.getValue();
+        String id = node.getId();
+
+        lval.transform(this);
+
+        // x must be a field name in that record
+        endCheck("RecordFieldAccess");
+        return node;
+    }
+
+    public ExpNode visitPointerDereferenceNode(ExpNode.PointerDereferenceNode node) {
+        beginCheck("PointerDereference");
+
+        endCheck("PointerDereference");
+        return node;
+    }
+
 
     //**************************** Support Methods ***************************
 

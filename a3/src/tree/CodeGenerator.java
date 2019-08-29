@@ -134,7 +134,6 @@ public class CodeGenerator implements DeclVisitor, StatementTransform<Code>,
         return code;
     }
 
-    //TODO NEEDS TO BE CHANGED HUGE
     /**
      * Generate code for a "write" statement.
      */
